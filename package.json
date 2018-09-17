@@ -1,0 +1,25 @@
+{
+  "name": "lgbtqbackend",
+  "version": "1.0.0",
+  "description": "Backend for the LGBTQ App",
+  "main": "app.js",
+  "scripts": {
+    "test": "swagger project test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvarotrianas/LGBTQBackend.git"
+  },
+  "keywords": [
+    "LGBTQ"
+  ],
+  "author": "Camilo Castro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvarotrianas/LGBTQBackend/issues"
+  },
+  "homepage": "https://github.com/alvarotrianas/LGBTQBackend#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
