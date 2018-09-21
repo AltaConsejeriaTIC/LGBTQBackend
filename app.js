@@ -1,12 +1,21 @@
 'use strict';
 
-var SwaggerExpress = require('swagger-express-mw');
+const Knex = require('knex')
+const morgan = require('morgan')
+const knexConfig = require('./knexfile');
+const { Model } = require('objection');
+
+const SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
-module.exports = app; // for testing
+module.exports = app;
 
 var config = {
-  appRoot: __dirname // required config
+  appRoot: __dirname
 };
+
+const knex = Knex(knexConfig.development);
+
+Model.knex(knex);
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }

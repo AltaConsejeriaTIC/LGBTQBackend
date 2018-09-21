@@ -1,3 +1,4 @@
+const { Model } = require("objection");
 const environment     = process.env.NODE_ENV || 'development';
 const configuration   = require('../../knexfile')[environment];
 const database        = require('knex')(configuration);
@@ -10,5 +11,6 @@ class User extends Model {
         return "users";
     }
 
-
 }
+
+module.exports = { User };
