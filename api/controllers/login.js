@@ -5,16 +5,17 @@ const configuration = require('../../knexfile')[environment];
 const database = require('knex')(configuration);
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const User = require('../../database/models/user');
+const {User} = require('../../database/models/user');
 var util = require('util');
 var user = require('../../database/models/user');
-
+let userData;
 module.exports = {
 	login: login
 };
 
 function login(req, res)
 {
+
 	const form = {
 		email: req.body.email,
 		password: req.body.password
@@ -22,26 +23,34 @@ function login(req, res)
 
 	findUser(form.email)
 	.then(foundUser => {
-		user = foundUser
+		userData = foundUser;
 		return checkPassword(form.password, foundUser)
 	})
 	.then((res) => createToken())
-	.then(token => updateUsertoken(token, user))
+	.then(token => updateUsertoken(token))
 	.then(() => {
 		delete user.password_digest
-		res.status(200).json(user)
+		res.status(200).json({"token" : user})
 	})
 	.catch((e) => console.error(e));
 
 }
 
-const findUser = (email) => {
-	return user.query().where('email', email);
+const createToken= () => {
+	return new Promise((resolve, reject) => {
+		crypto.randomBytes(16, (e, data) => {
+			e ? reject(e) : resolve(data.toString('base64'))
+		})
+	})
 }
+
+const findUser = (email) => {
+	return User.query().where('email', email);
+};
 
 const checkPassword = (password, foundUser) => {
 	return new Promise((resolve, reject) =>
-	bcrypt.compare(password, foundUser.password_digest, (e, response) => {
+	bcrypt.compare(password, foundUser[0].password_digest, (e, response) => {
 		if(e){
 			reject(e)
 		}
@@ -52,8 +61,8 @@ const checkPassword = (password, foundUser) => {
 		}
 	})
 	)
-}
+};
 
-const updateUserToken = (genToken, user) => {
-	return user.query().patch({token: genToken}).where('id', user.id)
-}
+const updateUsertoken = (genToken) => {
+	return User.query().patch({token: genToken}).where('id', userData[0].id)
+};

@@ -65,7 +65,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/LoginResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -90,4 +90,10 @@ definitions:
       email:
         type: string
       password:
+        type: string
+  LoginResponse:
+    required:
+      - token
+    properties:
+      token:
         type: string
