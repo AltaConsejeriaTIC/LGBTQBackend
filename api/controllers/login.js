@@ -29,8 +29,7 @@ function login(req, res)
 	.then((res) => createToken())
 	.then(token => updateUsertoken(token))
 	.then(() => {
-		delete user.password_digest
-		res.status(200).json({"token" : user})
+		res.status(200).send({"token" : userData[0].token})
 	})
 	.catch((e) => console.error(e));
 
@@ -64,5 +63,6 @@ const checkPassword = (password, foundUser) => {
 };
 
 const updateUsertoken = (genToken) => {
+	userData[0].token = genToken;
 	return User.query().patch({token: genToken}).where('id', userData[0].id)
 };
