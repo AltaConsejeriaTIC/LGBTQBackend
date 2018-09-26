@@ -6,6 +6,7 @@ const knexConfig = require('./knexfile');
 const { Model } = require('objection');
 
 const SwaggerExpress = require('swagger-express-mw');
+const helmet = require('helmet');
 var app = require('express')();
 module.exports = app;
 
@@ -16,6 +17,8 @@ var config = {
 const knex = Knex(knexConfig.development);
 
 Model.knex(knex);
+
+app.use(helmet())
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
