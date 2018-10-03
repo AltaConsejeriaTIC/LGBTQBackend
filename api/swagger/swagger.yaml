@@ -42,8 +42,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /swagger:
-    x-swagger-pipe: swagger_raw
   /login:
     # binds a127 app logic to a route
     x-swagger-router-controller: login
@@ -71,6 +69,40 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /event:
+    x-swagger-router-controller: event
+    get:
+      description: get the events list
+      operationId: getEvents
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new event to the list
+      parameters:
+        - in: body
+          name: event
+          description: The Event to create.
+          schema:
+            $ref: "#/definitions/Event"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/eventResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+  
 # complex objects have schema definitions
 definitions:
   GeneralResponse:
@@ -101,3 +133,38 @@ definitions:
     properties:
       token:
         type: string
+  Event:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of the event
+      description:
+        type: string
+        description: Description of the event
+      place:
+        type: string
+        description: Title of the event
+      address:
+        type: string
+        description: Title of the event
+      start_date:
+        type: string
+        description: Title of the event
+      finish_date:
+        type: string
+        description: Title of the event
+      start_time:
+        type: string
+        description: Title of the event
+      finish_time:
+        type: string
+        description: Title of the event
+      image:
+        type: string
+        description: Title of the event
+      
+      
+    required:
+      - name
+      - description
