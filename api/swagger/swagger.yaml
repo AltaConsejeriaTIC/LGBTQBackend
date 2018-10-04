@@ -70,7 +70,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /event:
-    x-swagger-router-controller: event
+    x-swagger-router-controller: event.controller
     get:
       description: get the events list
       operationId: getEvents
@@ -78,24 +78,68 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/GeneralObjectResponse"
+            $ref: "#/definitions/EventListResponse"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
       description: add a new event to the list
+      consumes:
+        - application/json 
+        - multipart/form-data
+        - x-www-form-urlencoded
       parameters:
-        - in: body
-          name: event
-          description: The Event to create.
-          schema:
-            $ref: "#/definitions/Event"
+        - in: formData
+          name: title
+          type: string
+          required: true
+          description: Title of the event
+        - in: formData
+          name: description
+          type: string
+          required: true
+          description: Description of the event
+        - in: formData  
+          name: place
+          type: string
+          required: true
+          description: Place of the event
+        - in: formData
+          name: address
+          type: string
+          required: true
+          description: Address of the event
+        - in: formData
+          name: start_date
+          type: string
+          required: true
+          description: Start date of the event
+        - in: formData
+          name: finish_date
+          type: string
+          required: true
+          description: End date of the event
+        - in: formData
+          name: start_time
+          type: string
+          required: true
+          description: Start time of the event
+        - in: formData
+          name: finish_time
+          type: string
+          required: true
+          description: End time of the event
+        - in: formData
+          name: image
+          type: file
+          required: true
+          description: Image of the event
       responses:
         "201":
           description: Success
           schema:
-            $ref: "#/definitions/eventResponse"
+            $ref: "#/definitions/EventResponse"
         default:
           description: Error
           schema:
@@ -133,9 +177,12 @@ definitions:
     properties:
       token:
         type: string
-  Event:
+  EventResponse:
     type: object
     properties:
+      id:
+        type: number
+        description: identifier
       title:
         type: string
         description: Title of the event
@@ -144,27 +191,42 @@ definitions:
         description: Description of the event
       place:
         type: string
-        description: Title of the event
+        description: Place of the event
       address:
         type: string
-        description: Title of the event
+        description: Address of the event
       start_date:
         type: string
-        description: Title of the event
+        description: Start date of the event
       finish_date:
         type: string
-        description: Title of the event
+        description: End date of the event
       start_time:
         type: string
-        description: Title of the event
+        description: Start time of the event
       finish_time:
         type: string
-        description: Title of the event
+        description: End time of the event
       image:
         type: string
-        description: Title of the event
-      
-      
+        description: Image of the event
     required:
-      - name
+      - id
+      - title
       - description
+      - place
+      - address
+      - start_date
+      - finish_date
+      - start_time
+      - finish_time
+      - image
+  EventListResponse:
+    required:
+      - events
+    properties:
+      events:
+        type: array
+        items:
+          $ref: "#/definitions/EventResponse"
+      
