@@ -69,8 +69,8 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /event:
-    x-swagger-router-controller: event.controller
+  /events:
+    x-swagger-router-controller: event
     get:
       description: get the events list
       operationId: getEvents
