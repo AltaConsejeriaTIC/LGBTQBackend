@@ -85,56 +85,12 @@ paths:
             $ref: "#/definitions/ErrorResponse"
     post:
       description: add a new event to the list
-      consumes:
-        - application/json 
-        - multipart/form-data
-        - x-www-form-urlencoded
       parameters:
-        - in: formData
-          name: title
-          type: string
-          required: true
-          description: Title of the event
-        - in: formData
-          name: description
-          type: string
-          required: true
-          description: Description of the event
-        - in: formData  
-          name: place
-          type: string
-          required: true
-          description: Place of the event
-        - in: formData
-          name: address
-          type: string
-          required: true
-          description: Address of the event
-        - in: formData
-          name: start_date
-          type: string
-          required: true
-          description: Start date of the event
-        - in: formData
-          name: finish_date
-          type: string
-          required: true
-          description: End date of the event
-        - in: formData
-          name: start_time
-          type: string
-          required: true
-          description: Start time of the event
-        - in: formData
-          name: finish_time
-          type: string
-          required: true
-          description: End time of the event
-        - in: formData
-          name: image
-          type: file
-          required: true
-          description: Image of the event
+        - in: body
+          name: event
+          description: The event to create.
+          schema:
+            $ref: "#/definitions/Event"
       responses:
         "201":
           description: Success
@@ -144,15 +100,174 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /events/{id}:
+    x-swagger-router-controller: event
+    get:
+      description: get a event
+      parameters: 
+      - name: id
+        type: number
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema: 
+           $ref: "#/definitions/EventResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a event
+      # define the parameters
+      parameters:
+        - name: id
+          description: event id
+          type: number
+          in: path
+          required: true
+        - in: body
+          name: event
+          description: The event to update.
+          schema:
+            $ref: "#/definitions/Event"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/EventResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+    delete:
+      description: delete a event
+      # define the parameters
+      parameters:
+        - name: id
+          description: event id
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /news:
+    x-swagger-router-controller: news
+    get:
+      description: get the news list
+      operationId: getNewss
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/NewsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a news to the list
+      parameters:
+        - in: body
+          name: news
+          description: News to create.
+          schema:
+            $ref: "#/definitions/News"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/NewsResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /news/{id}:
+    x-swagger-router-controller: news
+    get:
+      description: get a news
+      parameters: 
+      - name: id
+        type: number
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema: 
+           $ref: "#/definitions/NewsResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a news
+      # define the parameters
+      parameters:
+        - name: id
+          description: news id
+          type: number
+          in: path
+          required: true
+        - in: body
+          name: news
+          description: The news to update.
+          schema:
+            $ref: "#/definitions/News"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/NewsResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+    delete:
+      description: delete a news
+      # define the parameters
+      parameters:
+        - name: id
+          description: news id
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
   /swagger:
     x-swagger-pipe: swagger_raw
   
 # complex objects have schema definitions
 definitions:
-  GeneralResponse:
-    type: string
   GeneralObjectResponse:
     type: object
+  GeneralDeleteResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment
+    required:
+      - success
+      - description
   HelloWorldResponse:
     required:
       - message
@@ -177,6 +292,45 @@ definitions:
     properties:
       token:
         type: string
+  Event:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of the event
+      description:
+        type: string
+        description: Description of the event
+      place:
+        type: string
+        description: Place of the event
+      address:
+        type: string
+        description: Address of the event
+      start_date:
+        type: string
+        description: Start date of the event
+      finish_date:
+        type: string
+        description: End date of the event
+      start_time:
+        type: string
+        description: Start time of the event
+      finish_time:
+        type: string
+        description: End time of the event
+      image:
+        type: string
+        format: byte
+    required:
+      - title
+      - description
+      - address
+      - start_date
+      - finish_date
+      - start_time
+      - finish_time
+      - image     
   EventResponse:
     type: object
     properties:
@@ -209,12 +363,11 @@ definitions:
         description: End time of the event
       image:
         type: string
-        description: Image of the event
+        format: byte
     required:
       - id
       - title
       - description
-      - place
       - address
       - start_date
       - finish_date
@@ -229,4 +382,90 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/EventResponse"
-      
+  News:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of the news
+      description:
+        type: string
+        description: Description of the news
+      date:
+        type: string
+        description: Date of news publication
+      source:
+        type: string
+        description: Source of the news
+      state:
+        type: string
+        description: State of the event (published, not published)
+      image_owner:
+        type: string
+        description: Image owner of the event
+      source_link:
+        type: string
+        description: Source link of the news
+      image:
+        type: string
+        format: byte
+    required:
+      - title
+      - description
+      - date
+      - source
+      - state
+      - image_owner
+      - source_link
+      - image     
+  NewsResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      title:
+        type: string
+        description: Title of the event
+      description:
+        type: string
+        description: Description of the event
+      place:
+        type: string
+        description: Place of the event
+      address:
+        type: string
+        description: Address of the event
+      start_date:
+        type: string
+        description: Start date of the event
+      finish_date:
+        type: string
+        description: End date of the event
+      start_time:
+        type: string
+        description: Start time of the event
+      finish_time:
+        type: string
+        description: End time of the event
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - title
+      - description
+      - address
+      - start_date
+      - finish_date
+      - start_time
+      - finish_time
+      - image
+  NewsListResponse:
+    required:
+      - news
+    properties:
+      news:
+        type: array
+        items:
+          $ref: "#/definitions/NewsResponse"        
