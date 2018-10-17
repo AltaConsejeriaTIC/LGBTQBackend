@@ -152,7 +152,10 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
+      tags:
+        - "news post"
       description: add a news to the list
+      operationId: postNews
       parameters:
         - in: body
           name: news
@@ -405,39 +408,8 @@ definitions:
       id:
         type: number
         description: identifier
-      title:
-        type: string
-        description: Title of the news
-      description:
-        type: string
-        description: Description of the news
-      source:
-        type: string
-        description: Soruce of the news
-      source_link:
-        type: string
-        description: Source link of the news
-      date:
-        type: string
-        description: Date of the news
-      image_owner:
-        type: string
-        description: Picture owner
-      image:
-        type: string
-        description: Route of the picture
-      created_at:
-        type: string
-        description: Creation date
     required:
       - id
-      - title
-      - description
-      - source
-      - source_link
-      - date
-      - image_owner
-      - image
   NewsListResponse:
     required:
       - news

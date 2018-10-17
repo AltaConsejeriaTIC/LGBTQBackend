@@ -30,11 +30,9 @@ function getNewsId(req, res) {
 const findNewsId = (id) =>  News.query().where('id', id).first();
 
 function postNews(req, res) {
-    console.log(req.body)
     insert(req.body)
         .then( response => {
-            console.log(response);
-            res.status(200);
+            res.status(201).send({id: response.id});
         })
         .catch(e => console.error(e));
 
