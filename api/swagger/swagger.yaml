@@ -291,6 +291,9 @@ definitions:
       finish_time:
         type: string
         description: End time of the event
+      state:
+        type: boolean
+        description: indicates if the event is 'noted' or no
       image:
         type: string
         format: byte
@@ -302,6 +305,7 @@ definitions:
       - finish_date
       - start_time
       - finish_time
+      - state
       - image     
   EventResponse:
     type: object
@@ -333,6 +337,9 @@ definitions:
       finish_time:
         type: string
         description: End time of the event
+      state:
+        type: boolean
+        description: indicates if the event is 'noted' or no
       image:
         type: string
         format: byte
@@ -345,6 +352,7 @@ definitions:
       - finish_date
       - start_time
       - finish_time
+      - state
       - image
   EventListResponse:
     required:
@@ -378,6 +386,9 @@ definitions:
       source_link:
         type: string
         description: Source link of the news
+      state:
+        type: boolean
+        description: indicates if the new is 'noted' or no
       image:
         type: string
         format: byte
@@ -389,6 +400,7 @@ definitions:
       - state
       - image_owner
       - source_link
+      - state
       - image     
   NewsResponse:
     type: object
@@ -419,7 +431,10 @@ definitions:
         description: Start time of the event
       finish_time:
         type: string
-        description: End time of the event
+        description: End time of the
+      state:
+        type: boolean
+        description: indicates if the event is 'noted' or no
       image:
         type: string
         format: byte
@@ -432,6 +447,7 @@ definitions:
       - finish_date
       - start_time
       - finish_time
+      - state
       - image
   NewsListResponse:
     required:
