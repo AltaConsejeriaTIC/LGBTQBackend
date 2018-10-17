@@ -21,7 +21,7 @@ function getEvent(req, res) {
     const id = req.swagger.params.id.value;
 
     findEvent(id)
-        .then((event) => {
+        .then(event => {
             if (!event) {
                 res.status(400).send({ message: 'Invalid ID' });
             } else {
@@ -31,12 +31,23 @@ function getEvent(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findEvent = (id) =>
-    Event.query()
-    .where('id', id)
-    .first();
+const findEvent = (id) =>  Event.query().where('id', id).first();
+
+function postEvent(req, res) {
+    console.log(req.body)
+    insert(req.body)
+        .then( response => {
+            console.log(response);
+            res.status(200);
+        })
+        .catch(e => console.error(e));
+
+
+}
+const insert = (event) => Event.query().insert(event);
 
 module.exports = {
     getEvents,
-    getEvent
+    getEvent,
+    postEvent
 };

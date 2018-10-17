@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
             table.string('image_owner');
             table.string('image').notNullable();
             table.boolean('state').notNullable();
-            table.timestamp('created_at').defaultTo(kanex.fn.now());
+            table.timestamp('created_at').defaultTo(knex.fn.now());
         })
     ]);
 };

@@ -16,7 +16,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-10-28',
                     image_owner: 'Archivo/El TIEMPO',
                     image: '/images/noticia01.jpg',
-                    state: true;
+                    state: true,
                 },
                 {
                     id: 2,
@@ -33,7 +33,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-02-03',
                     image_owner: 'Publímetro.co',
                     image: '/images/noticia02.jpg',
-                    state: true;
+                    state: true,
                 }
             ]);
         });
