@@ -141,7 +141,7 @@ paths:
     x-swagger-router-controller: news
     get:
       description: get the news list
-      operationId: getNewss
+      operationId: getNews
       responses:
         "200":
           description: Success
@@ -172,6 +172,7 @@ paths:
     x-swagger-router-controller: news
     get:
       description: get a news
+      operationId: getNewsId
       parameters: 
       - name: id
         type: number
@@ -406,44 +407,36 @@ definitions:
         description: identifier
       title:
         type: string
-        description: Title of the event
+        description: Title of the news
       description:
         type: string
-        description: Description of the event
-      place:
+        description: Description of the news
+      source:
         type: string
-        description: Place of the event
-      address:
+        description: Soruce of the news
+      source_link:
         type: string
-        description: Address of the event
-      start_date:
+        description: Source link of the news
+      date:
         type: string
-        description: Start date of the event
-      finish_date:
+        description: Date of the news
+      image_owner:
         type: string
-        description: End date of the event
-      start_time:
-        type: string
-        description: Start time of the event
-      finish_time:
-        type: string
-        description: End time of the
-      state:
-        type: boolean
-        description: indicates if the event is 'noted' or no
+        description: Picture owner
       image:
         type: string
-        format: byte
+        description: Route of the picture
+      created_at:
+        type: string
+        description: Creation date
     required:
       - id
       - title
       - description
-      - address
-      - start_date
-      - finish_date
-      - start_time
-      - finish_time
-      - state
+      - source
+      - source_link
+      - date
+      - image_owner
       - image
   NewsListResponse:
     required:
