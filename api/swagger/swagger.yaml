@@ -386,9 +386,6 @@ definitions:
       source_link:
         type: string
         description: Source link of the news
-      state:
-        type: boolean
-        description: indicates if the new is 'noted' or no
       image:
         type: string
         format: byte
@@ -400,7 +397,6 @@ definitions:
       - state
       - image_owner
       - source_link
-      - state
       - image     
   NewsResponse:
     type: object
