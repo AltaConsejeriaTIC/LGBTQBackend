@@ -197,7 +197,9 @@ paths:
     put:
       description: update a news
       # define the parameters
-      operationId: putNews
+      operationId: updateNews
+      tags:
+        - "update News"
       parameters:
         - name: id
           description: news id
@@ -210,7 +212,7 @@ paths:
           schema:
             $ref: "#/definitions/News"
       responses:
-        "200":
+        "201":
           description: Success
           schema:
             $ref: "#/definitions/NewsResponse"
