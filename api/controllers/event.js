@@ -15,7 +15,13 @@ function getEvents(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findEvents = () => Event.query();
+const findEvents = () => Event.query()
+                              .where( 'finish_date', ">=", getCurrentDate() );
+
+function getCurrentDate() {
+  return new Date();
+  //return new Date().toISOString().split('T')[0];
+}
 
 function getEvent(req, res) {
     const id = req.swagger.params.id.value;

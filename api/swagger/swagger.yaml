@@ -50,6 +50,8 @@ paths:
     get:
       description: get the events list
       operationId: getEvents
+      tags:
+        - "get events"
       responses:
         "200":
           description: Success
@@ -140,6 +142,8 @@ paths:
   /news:
     x-swagger-router-controller: news
     get:
+      tags:
+        - "get news"
       description: get the news list
       operationId: getNews
       responses:
@@ -193,6 +197,7 @@ paths:
     put:
       description: update a news
       # define the parameters
+      operationId: putNews
       parameters:
         - name: id
           description: news id
