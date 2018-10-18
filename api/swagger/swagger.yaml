@@ -222,6 +222,9 @@ paths:
             $ref: "#/definitions/ErrorResponse"  
     delete:
       description: delete a news
+      operationId: deleteNewsId
+      tags:
+        - "delete News"
       # define the parameters
       parameters:
         - name: id

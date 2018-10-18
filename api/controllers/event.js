@@ -47,9 +47,9 @@ function postEvent(req, res) {
             res.status(200);
         })
         .catch(e => console.error(e));
-
-
 }
+
+
 const insert = (event) => Event.query().insert(event);
 
 module.exports = {

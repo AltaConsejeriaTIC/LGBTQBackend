@@ -74,11 +74,35 @@ const newsUpdated = (data,id) => News.query()
     created_at: data.created_at
   });
 
-  
+function deleteNewsId( req, res ){
+  const id = req.swagger.params.id.value;
+
+  findNewsId(id)
+      .then(news => {
+          if (!news) {                
+              res.status(400).send({ message: 'Invalid ID' });
+          } else {
+            newsDeleted(id)
+                .then( response => {
+                    console.log( 'response', response);
+                    res.status(200).send( {success:response, description: 'Success news deleted'} );
+                }) 
+                .catch((e) => console.error(e));
+          }
+      })
+      .catch((e) => console.error(e));
+}
+
+
+const newsDeleted = (id) => News.query()
+  .delete()
+  .where('id', id);
+
 
 module.exports = {
     getNews,
     getNewsId,
     postNews,
-    updateNews
+    updateNews,
+    deleteNewsId
 };
