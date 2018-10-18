@@ -95,8 +95,7 @@ function deleteNewsId( req, res ){
 
 
 const newsDeleted = (id) => News.query()
-  .delete()
-  .where('id', id);
+  .deleteById(id)
 
 
 module.exports = {
