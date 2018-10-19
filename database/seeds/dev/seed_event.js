@@ -12,7 +12,10 @@ exports.seed = function(knex, Promise) {
                     start_time: '2:00 P.M.',
                     finish_time: '5:00 A.M',
                     state: true,
-                    image: '/images/evento01.jpg'
+                    image: '/images/evento01.jpg',
+                    latitude: 4.6486257,
+                    longitude: 74.0680979
+
                 },
                 {
                     id: 2,
@@ -33,7 +36,9 @@ exports.seed = function(knex, Promise) {
                     start_time: '5:30 P.M.',
                     finish_time: '7:30 P.M.',
                     state: true,
-                    image: '/images/evento02.jpg'
+                    image: '/images/evento02.jpg',
+                    latitude: 4.6486257,
+                    longitude: 74.0680979
                 },
                 {
                     id: 3,
@@ -46,7 +51,9 @@ exports.seed = function(knex, Promise) {
                     start_time: '9:30 A.M.',
                     finish_time: '11:30 A.M.',
                     state: true,
-                    image: '/images/evento03.jpg'
+                    image: '/images/evento03.jpg',
+                    latitude: 4.6486257,
+                    longitude: 74.0680979
                 },
                 {
                     id: 4,
@@ -59,7 +66,9 @@ exports.seed = function(knex, Promise) {
                     start_time: '7:00 P.M.',
                     finish_time: '9:00 P.M.',
                     state: true,
-                    image: '/images/evento04.jpg'
+                    image: '/images/evento04.jpg',
+                    latitude: 4.6486257,
+                    longitude: 74.0680979
                 },
                 {
                     id: 5,
@@ -72,7 +81,9 @@ exports.seed = function(knex, Promise) {
                     start_time: '8:00 P.M.',
                     finish_time: '10:00 P.M.',
                     state: true,
-                    image: '/images/evento05.jpg'
+                    image: '/images/evento05.jpg',
+                    latitude: 4.6486257,
+                    longitude: 74.0680979
                 }
             ]);
         });

@@ -311,6 +311,12 @@ definitions:
       image:
         type: string
         format: byte
+      latitude:
+        type: number
+        description: event's latitude
+      longitude:
+        type: number
+        description: event's longitude
     required:
       - title
       - description
@@ -320,7 +326,9 @@ definitions:
       - start_time
       - finish_time
       - state
-      - image     
+      - image
+      - latitude
+      - longitude
   EventResponse:
     type: object
     properties:
@@ -357,6 +365,12 @@ definitions:
       image:
         type: string
         format: byte
+      latitude:
+        type: number
+        description: event's latitude
+      longitude:
+        type: number
+        description: event's longitude
     required:
       - id
       - title
@@ -368,6 +382,8 @@ definitions:
       - finish_time
       - state
       - image
+      - latitude
+      - longitude
   EventListResponse:
     required:
       - events
