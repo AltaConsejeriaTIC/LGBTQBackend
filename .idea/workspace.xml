@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="067ef6b3-ad45-4d27-8e23-8af2c71cf1a0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/swagger/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/api/swagger/swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/event.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/event.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -86,13 +84,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="2" />
-          <entry key="js" value="348" />
+          <entry key="js" value="392" />
           <entry key="yaml" value="109" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="348" />
+          <entry key="JavaScript" value="392" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="YAML" value="109" />
         </counts>
@@ -101,20 +99,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/controllers/event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="42" column="38" lean-forward="true" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/swagger/swagger.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="449" column="13" selection-start-line="449" selection-start-column="13" selection-end-line="449" selection-end-column="13" />
+            <state relative-caret-position="479">
+              <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -142,11 +131,11 @@
         <option value="$PROJECT_DIR$/database/seeds/dev/admin.js" />
         <option value="$PROJECT_DIR$/database/models/user.js" />
         <option value="$PROJECT_DIR$/api/controllers/login.js" />
-        <option value="$PROJECT_DIR$/api/controllers/event.js" />
         <option value="$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js" />
         <option value="$PROJECT_DIR$/database/migrations/20181016143525_create_news_table.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/api/swagger/swagger.yaml" />
+        <option value="$PROJECT_DIR$/api/controllers/event.js" />
       </list>
     </option>
   </component>
@@ -191,28 +180,6 @@
               <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
               <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="swagger" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -255,7 +222,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25438000" />
+    <option name="totallyTimeSpent" value="25488000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -400,8 +367,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/controllers/event.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="42" column="38" lean-forward="true" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
+        <state relative-caret-position="479">
+          <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
         </state>
       </provider>
     </entry>

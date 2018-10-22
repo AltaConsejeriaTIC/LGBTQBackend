@@ -79,6 +79,22 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /allevents:
+    x-swagger-router-controller: event
+    get:
+      description: get the events list
+      operationId: getAllEvents
+      tags:
+        - "get events"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/EventListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /events/{id}:
     x-swagger-router-controller: event
     get:
