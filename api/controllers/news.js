@@ -18,7 +18,7 @@ function getNewsId(req, res) {
 
     findNewsId(id)
         .then(news => {
-            if (!news) {                
+            if (!news) {
                 res.status(400).send({ message: 'Invalid ID' });
             } else {
                 res.status(200).send(news);
@@ -27,75 +27,72 @@ function getNewsId(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findNewsId = (id) =>  News.query().where('id', id).first();
+const findNewsId = (id) => News.query().where('id', id).first();
 
 function postNews(req, res) {
     insert(req.body)
-        .then( response => {
-            res.status(201).send({id: response.id});
+        .then(response => {
+            res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
-
-
 }
 const insert = (news) => News.query().insert(news);
 
-function updateNews(req, res){
+function updateNews(req, res) {
 
-  const id = req.swagger.params.id.value;
+    const id = req.swagger.params.id.value;
 
-  findNewsId(id)
-      .then(news => {
-          if (!news) {                
-              res.status(400).send({ message: 'Invalid ID' });
-          } else {
-              newsUpdated(req.body , id)
-                .then( response => {
-                    res.status(201).send( {id: response.id} );
-                })
-                .catch((e) => console.error(e));
-
-          }
-      })
-      .catch((e) => console.error(e));
+    findNewsId(id)
+        .then(news => {
+            if (!news) {
+                res.status(400).send({ message: 'Invalid ID' });
+            } else {
+                newsUpdated(req.body, id)
+                    .then(response => {
+                        res.status(201).send({ id: response.id });
+                    })
+                    .catch((e) => console.error(e));
+            }
+        })
+        .catch((e) => console.error(e));
 
 }
 
-const newsUpdated = (data,id) => News.query()
-  .patchAndFetchById(id, {
-    title: data.title,
-    description: data.description,
-    source: data.source,
-    source_link: data.source_link,
-    date: data.date,
-    image_owner: data.image_owner,
-    image: data.image,
-    state: data.state,
-    created_at: data.created_at
-  });
+const newsUpdated = (data, id) => News.query()
+    .patchAndFetchById(id, {
+        title: data.title,
+        description: data.description,
+        source: data.source,
+        source_link: data.source_link,
+        date: data.date,
+        image_owner: data.image_owner,
+        image: data.image,
+        state: data.state,
+        created_at: data.created_at
+    });
 
-function deleteNewsId( req, res ){
-  const id = req.swagger.params.id.value;
+function deleteNewsId(req, res) {
+    const id = req.swagger.params.id.value;
 
-  findNewsId(id)
-      .then(news => {
-          if (!news) {                
-              res.status(400).send({ message: 'Invalid ID' });
-          } else {
-            newsDeleted(id)
-                .then( response => {
-                    console.log( 'response', response);
-                    res.status(200).send( {success:response, description: 'Success news deleted'} );
-                }) 
-                .catch((e) => console.error(e));
-          }
-      })
-      .catch((e) => console.error(e));
+    findNewsId(id)
+        .then(news => {
+            if (!news) {
+                res.status(400).send({ message: 'Invalid ID' });
+            } else {
+                newsDeleted(id)
+                    .then(response => {
+                        console.log('response', response);
+                        res.status(200).send({ success: response, description: 'Success news deleted' });
+                    })
+                    .catch((e) => console.error(e));
+            }
+        })
+        .catch((e) => console.error(e));
 }
 
 
 const newsDeleted = (id) => News.query()
-  .deleteById(id)
+    .deleteById(id)
 
 
 module.exports = {
