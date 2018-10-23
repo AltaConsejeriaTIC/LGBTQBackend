@@ -116,7 +116,10 @@ paths:
             $ref: "#/definitions/ErrorResponse"
     put:
       description: update a event
+      operationId: updateEvent
       # define the parameters
+      tags:
+        - "update Event"
       parameters:
         - name: id
           description: event id
@@ -129,7 +132,7 @@ paths:
           schema:
             $ref: "#/definitions/Event"
       responses:
-        "200":
+        "201":
           description: Success
           schema:
             $ref: "#/definitions/EventResponse"
@@ -351,55 +354,8 @@ definitions:
       id:
         type: number
         description: identifier
-      title:
-        type: string
-        description: Title of the event
-      description:
-        type: string
-        description: Description of the event
-      place:
-        type: string
-        description: Place of the event
-      address:
-        type: string
-        description: Address of the event
-      start_date:
-        type: string
-        description: Start date of the event
-      finish_date:
-        type: string
-        description: End date of the event
-      start_time:
-        type: string
-        description: Start time of the event
-      finish_time:
-        type: string
-        description: End time of the event
-      state:
-        type: boolean
-        description: indicates if the event is 'noted' or no
-      image:
-        type: string
-        format: byte
-      latitude:
-        type: number
-        description: event's latitude
-      longitude:
-        type: number
-        description: event's longitude
     required:
       - id
-      - title
-      - description
-      - address
-      - start_date
-      - finish_date
-      - start_time
-      - finish_time
-      - state
-      - image
-      - latitude
-      - longitude
   EventListResponse:
     required:
       - events
@@ -424,7 +380,7 @@ definitions:
         type: string
         description: Source of the news
       state:
-        type: string
+        type: boolean
         description: State of the event (published, not published)
       image_owner:
         type: string

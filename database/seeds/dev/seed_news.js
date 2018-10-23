@@ -76,7 +76,7 @@ exports.seed = function(knex, Promise) {
                     description: 'La homosexualidad, que la Corte Suprema de la India acaba de despenalizar, sigue siendo reprimida o incluso castigada con la pena de muerte en muchos países.' +
                         ' En otros, en cambio, se reconoce plenamente y se permite el matrimonio entre personas del mismo sexo.\n' +
                         ' \nUn crimen en África\n' +
-                        ' En un continente donde 30 países prohíben la homosexualidad, Sudáfrica es una excepción: El Gobierno sudafricano legalizó el matrimonio gay en el 2006.\n' +
+                        'En un continente donde 30 países prohíben la homosexualidad, Sudáfrica es una excepción: El Gobierno sudafricano legalizó el matrimonio gay en el 2006.\n' +
                         ' \nAdemás, la adopción, la procreación médicamente asistida (PMA) y la subrogación (vientre de alquiler) están permitidas. Sin embargo, las relaciones entre personas,' +
                         ' del mismo sexo son castigadas con la muerte en Sudán, Somalía y Mauritania. Solo unos pocos países (Gabón, Costa de Marfil, Malí, Chad,' +
                         ' Mozambique o la República Democrática del Congo) la han despenalizado.',
