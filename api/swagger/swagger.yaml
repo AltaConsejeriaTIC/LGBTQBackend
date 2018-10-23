@@ -264,7 +264,7 @@ paths:
     x-swagger-router-controller: organization
     get:
       description: get the organizations list
-      operationId: getOrganization
+      operationId: getOrganizations
       tags:
         - "get organizations"
       responses:
@@ -283,6 +283,51 @@ paths:
         - in: body
           name: organization
           description: The organization to create.
+          schema:
+            $ref: "#/definitions/Organization"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /organizations/{id}:
+    x-swagger-router-controller: organization
+    get:
+      description: get a organization
+      operationId: getOrganization
+      parameters: 
+      - name: id
+        type: number
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema: 
+           $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a organization
+      operationId: updateOrganization
+      # define the parameters
+      tags:
+        - "update Organization"
+      parameters:
+        - name: id
+          description: organization id
+          type: number
+          in: path
+          required: true
+        - in: body
+          name: organization
+          description: The organization to update.
           schema:
             $ref: "#/definitions/Organization"
       responses:
