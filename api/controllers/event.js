@@ -15,8 +15,17 @@ function getEvents(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findEvents = () => Event.query()
-                              .where( 'finish_date', ">=", getCurrentDate() );
+const findEvents = () => Event.query().where( 'finish_date', ">=", getCurrentDate() );
+
+function getAllEvents(req, res) {
+    findAllEvents()
+        .then((events) => {
+            res.status(200).send(events);
+        })
+        .catch((e) => console.error(e));
+}
+
+const findAllEvents = () => Event.query()
 
 function getCurrentDate() {
   return new Date();
@@ -54,6 +63,7 @@ const insert = (event) => Event.query().insert(event);
 
 module.exports = {
     getEvents,
+    getAllEvents,
     getEvent,
     postEvent
 };
