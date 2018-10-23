@@ -39,7 +39,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/GeneralObjectResponse"
+            $ref: "#/definitions/LoginObjectResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -74,7 +74,7 @@ paths:
         "201":
           description: Success
           schema:
-            $ref: "#/definitions/EventResponse"
+            $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -109,7 +109,7 @@ paths:
         "200":
           description: Success
           schema: 
-           $ref: "#/definitions/EventResponse"
+           $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -135,7 +135,7 @@ paths:
         "201":
           description: Success
           schema:
-            $ref: "#/definitions/EventResponse"
+            $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -189,7 +189,7 @@ paths:
         "201":
           description: Success
           schema:
-            $ref: "#/definitions/NewsResponse"
+            $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -208,7 +208,7 @@ paths:
         "200":
           description: Success
           schema: 
-           $ref: "#/definitions/NewsResponse"
+           $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -234,7 +234,7 @@ paths:
         "201":
           description: Success
           schema:
-            $ref: "#/definitions/NewsResponse"
+            $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -259,13 +259,47 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"          
+            $ref: "#/definitions/ErrorResponse"
+  /organizations:
+    x-swagger-router-controller: organization
+    get:
+      description: get the organizations list
+      operationId: getOrganization
+      tags:
+        - "get organizations"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/OrganizationsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new organization to the list
+      operationId: postOrganization
+      parameters:
+        - in: body
+          name: organization
+          description: The organization to create.
+          schema:
+            $ref: "#/definitions/Organization"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
   
 # complex objects have schema definitions
 definitions:
-  GeneralObjectResponse:
+  LoginObjectResponse:
     type: object
   GeneralDeleteResponse:
     type: object
@@ -348,7 +382,7 @@ definitions:
       - image
       - latitude
       - longitude
-  EventResponse:
+  GeneralObjectResponse:
     type: object
     properties:
       id:
@@ -363,7 +397,7 @@ definitions:
       events:
         type: array
         items:
-          $ref: "#/definitions/EventResponse"
+          $ref: "#/definitions/GeneralObjectResponse"
   News:
     type: object
     properties:
@@ -400,14 +434,6 @@ definitions:
       - image_owner
       - source_link
       - image     
-  NewsResponse:
-    type: object
-    properties:
-      id:
-        type: number
-        description: identifier
-    required:
-      - id
   NewsListResponse:
     required:
       - news
@@ -415,4 +441,44 @@ definitions:
       news:
         type: array
         items:
-          $ref: "#/definitions/NewsResponse"        
+          $ref: "#/definitions/GeneralObjectResponse"
+  Organization:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the organization
+      description:
+        type: string
+        description: Description of the organization
+      website:
+        type: string
+        description: Website of the organization
+      address:
+        type: string
+        description: Address of the event
+      email:
+        type: string
+        description: Start date of the event
+      phone:
+        type: number
+        description: End date of the event
+      state:
+        type: boolean
+        description: indicates if the event is 'noted' or no
+      image:
+        type: string
+        format: byte
+    required:
+      - name
+      - description 
+      - state
+      - image
+  OrganizationsListResponse:
+    required:
+      - news
+    properties:
+      news:
+        type: array
+        items:
+          $ref: "#/definitions/GeneralObjectResponse"
