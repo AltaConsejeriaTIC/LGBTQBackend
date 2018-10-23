@@ -13,9 +13,8 @@ exports.seed = function(knex, Promise) {
                     finish_time: '5:00 A.M',
                     state: true,
                     image: '/images/evento01.jpg',
-                    latitude: 4.6486257,
-                    longitude: 74.0680979
-
+                    latitude: 4.609549,
+                    longitude: -74.070948
                 },
                 {
                     id: 2,
@@ -37,8 +36,8 @@ exports.seed = function(knex, Promise) {
                     finish_time: '7:30 P.M.',
                     state: true,
                     image: '/images/evento02.jpg',
-                    latitude: 4.6486257,
-                    longitude: 74.0680979
+                    latitude: 4.596973,
+                    longitude: -74.074396
                 },
                 {
                     id: 3,
@@ -52,8 +51,8 @@ exports.seed = function(knex, Promise) {
                     finish_time: '11:30 A.M.',
                     state: true,
                     image: '/images/evento03.jpg',
-                    latitude: 4.6486257,
-                    longitude: 74.0680979
+                    latitude: 4.623472,
+                    longitude: -74.063663
                 },
                 {
                     id: 4,
@@ -67,8 +66,8 @@ exports.seed = function(knex, Promise) {
                     finish_time: '9:00 P.M.',
                     state: true,
                     image: '/images/evento04.jpg',
-                    latitude: 4.6486257,
-                    longitude: 74.0680979
+                    latitude: 4.632349,
+                    longitude: -74.075251
                 },
                 {
                     id: 5,
@@ -82,8 +81,8 @@ exports.seed = function(knex, Promise) {
                     finish_time: '10:00 P.M.',
                     state: true,
                     image: '/images/evento05.jpg',
-                    latitude: 4.6486257,
-                    longitude: 74.0680979
+                    latitude: 4.756900,
+                    longitude: -74.062581
                 }
             ]);
         });
