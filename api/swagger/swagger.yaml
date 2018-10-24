@@ -297,7 +297,7 @@ paths:
   /organizations/{id}:
     x-swagger-router-controller: organization
     get:
-      description: get a organization
+      description: get an organization
       operationId: getOrganization
       parameters: 
       - name: id
@@ -314,7 +314,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     put:
-      description: update a organization
+      description: update an organization
       operationId: updateOrganization
       # define the parameters
       tags:
@@ -328,6 +328,85 @@ paths:
         - in: body
           name: organization
           description: The organization to update.
+          schema:
+            $ref: "#/definitions/Organization"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /alliances:
+    x-swagger-router-controller: alliance
+    get:
+      description: get the alliances list
+      operationId: getAlliances
+      tags:
+        - "get alliances"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AlliancesListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new alliance to the list
+      operationId: postAlliance
+      parameters:
+        - in: body
+          name: alliance
+          description: The alliance to create.
+          schema:
+            $ref: "#/definitions/Alliance"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /alliance/{id}:
+    x-swagger-router-controller: alliance
+    get:
+      description: get an alliance
+      operationId: getAlliance
+      parameters: 
+      - name: id
+        type: number
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema: 
+           $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update an alliance
+      operationId: updateAlliance
+      # define the parameters
+      tags:
+        - "update Alliance"
+      parameters:
+        - name: id
+          description: alliance id
+          type: number
+          in: path
+          required: true
+        - in: body
+          name: alliance
+          description: The alliance to update.
           schema:
             $ref: "#/definitions/Organization"
       responses:
@@ -519,7 +598,51 @@ definitions:
       - description 
       - state
       - image
+      - email
+      - phone
   OrganizationsListResponse:
+    required:
+      - news
+    properties:
+      news:
+        type: array
+        items:
+          $ref: "#/definitions/GeneralObjectResponse"
+  Alliance:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the alliance
+      description:
+        type: string
+        description: Description of the alliance
+      offer:
+        type: string
+        description: Offer terms and conditions
+      website:
+        type: string
+        description: Website of the alliance
+      phone:
+        type: number
+        description: End date of the event
+      state:
+        type: boolean
+        description: indicates if the event is 'noted' or no
+      finish_date:
+        type: string
+        description: Closing date of the offer
+      image:
+        type: string
+        format: byte
+    required:
+      - name
+      - description
+      - offer
+      - finish_date
+      - state
+      - image
+  AlliancesListResponse:
     required:
       - news
     properties:
