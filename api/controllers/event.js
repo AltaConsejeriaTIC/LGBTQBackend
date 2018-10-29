@@ -92,7 +92,7 @@ const eventUpdated = (data, id) => Event.query()
         state: data.state,
         latitude: data.latitude,
         longitude: data.longitude,
-        created_at: data.created_at
+        updated_at: getCurrentDate()
     });
 
 

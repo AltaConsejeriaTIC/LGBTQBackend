@@ -68,7 +68,7 @@ const newsUpdated = (data, id) => News.query()
         image_owner: data.image_owner,
         image: data.image,
         state: data.state,
-        created_at: data.created_at
+        updated_at: getCurrentDate()
     });
 
 function deleteNewsId(req, res) {

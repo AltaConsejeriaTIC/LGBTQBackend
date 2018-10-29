@@ -15,6 +15,7 @@ exports.up = function(knex, Promise) {
             table.float('latitude').notNullable();
             table.float('longitude').notNullable();
             table.timestamp('created_at').defaultTo(knex.fn.now());
+            table.timestamp("updated_at").defaultTo(knex.fn.now());
         })
     ]);
 };

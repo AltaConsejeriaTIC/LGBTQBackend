@@ -64,6 +64,8 @@ paths:
     post:
       description: add a new event to the list
       operationId: postEvent
+      tags:
+        - "post events"
       parameters:
         - in: body
           name: event
@@ -358,6 +360,8 @@ paths:
     post:
       description: add a new alliance to the list
       operationId: postAlliance
+      tags:
+        - "post alliances"
       parameters:
         - in: body
           name: alliance
@@ -624,11 +628,11 @@ definitions:
         type: string
         description: Website of the alliance
       phone:
-        type: number
-        description: End date of the event
+        type: string
+        description: Phone of the alliance
       state:
         type: boolean
-        description: indicates if the event is 'noted' or no
+        description: indicates if the alliance is 'noted' or no
       finish_date:
         type: string
         description: Closing date of the offer

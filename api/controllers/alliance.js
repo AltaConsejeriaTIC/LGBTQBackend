@@ -1,35 +1,35 @@
 'use strict';
 
-const { Organization } = require('../../database/models/organization');
+const { Alliance } = require('../../database/models/alliance');
 
 
-function getOrganizations(req, res) {
-    findOrganizations()
+function getAlliances(req, res) {
+    findAlliances()
         .then((news) => {
             res.status(200).send(news);
         })
         .catch((e) => console.error(e));
 }
 
-const findOrganizations = () => Organization.query();
+const findAlliances = () => Alliance.query();
 
-function getOrganization(req, res) {
+function getAlliance(req, res) {
     const id = req.swagger.params.id.value;
 
-    findOrganization(id)
-        .then(organization => {
-            if (!organization) {
+    findAlliance(id)
+        .then(alliance => {
+            if (!alliance) {
                 res.status(400).send({ message: 'Invalid ID' });
             } else {
-                res.status(200).send(organization);
+                res.status(200).send(alliance);
             }
         })
         .catch((e) => console.error(e));
 }
 
-const findOrganization = (id) => Organization.query().where('id', id).first();
+const findAlliance = (id) => Alliance.query().where('id', id).first();
 
-function postOrganization(req, res) {
+function postAlliance(req, res) {
     insert(req.body)
         .then(response => {
             res.status(201).send({ id: response.id });
@@ -37,18 +37,18 @@ function postOrganization(req, res) {
         .catch(e => console.error(e));
 }
 
-const insert = (organization) => Organization.query().insert(organization);
+const insert = (alliance) => Alliance.query().insert(alliance);
 
-function updateOrganization(req, res) {
+function updateAlliance(req, res) {
 
     const id = req.swagger.params.id.value;
 
-    findOrganization(id)
-        .then(organization => {
-            if (!organization) {
+    findAlliance(id)
+        .then(alliance => {
+            if (!alliance) {
                 res.status(400).send({ message: 'Invalid ID' });
             } else {
-                organizationUpdated(req.body, id)
+                allianceUpdated(req.body, id)
                     .then(response => {
                         res.status(201).send({ id: response.id });
                     })
@@ -59,23 +59,24 @@ function updateOrganization(req, res) {
         .catch((e) => console.error(e));
 }
 
-const organizationUpdated = (data, id) => Organization.query()
+const allianceUpdated = (data, id) => Alliance.query()
     .patchAndFetchById(id, {
         name: data.name,
         description: data.description,
+        offer: data.offer,
         website: data.website,
-        address: data.address,
         email: data.email,
         phone: data.phone,
         state: data.state,
+        finish_date: data.finish_date,
         image: data.image,
         updated_at: getCurrentDate()
     });
 
 
 module.exports = {
-    getOrganizations,
-    getOrganization,
-    postOrganization,
-    updateOrganization
+    getAlliances,
+    getAlliance,
+    postAlliance,
+    updateAlliance
 };
