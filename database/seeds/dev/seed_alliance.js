@@ -1,7 +1,7 @@
 exports.seed = function(knex, Promise) {
     return knex('alliances').del()
         .then(function() {
-            return knex('aliances').insert([{
+            return knex('alliances').insert([{
                     id: 1,
                     name: 'Talento diverso',
                     description: 'El programa talento diverso tiene como objetivo mejorar las condiciones laborales de la' +

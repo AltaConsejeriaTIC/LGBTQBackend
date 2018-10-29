@@ -580,16 +580,16 @@ definitions:
         description: Website of the organization
       address:
         type: string
-        description: Address of the event
+        description: Address of the organization
       email:
         type: string
-        description: Start date of the event
+        description: Email of the organization
       phone:
-        type: number
-        description: End date of the event
+        type: string
+        description: Phone of the organization
       state:
         type: boolean
-        description: indicates if the event is 'noted' or no
+        description: indicates if the organization is 'noted' or no
       image:
         type: string
         format: byte
