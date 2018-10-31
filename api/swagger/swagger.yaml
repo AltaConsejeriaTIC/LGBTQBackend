@@ -422,6 +422,105 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /users:
+    x-swagger-router-controller: user
+    get:
+      description: get the users list
+      operationId: getUsers
+      tags:
+        - "get users"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UserListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new user to the list
+      operationId: postUser
+      tags:
+        - "post users"
+      parameters:
+        - in: body
+          name: user
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /users/{id}:
+    x-swagger-router-controller: user
+    get:
+      description: get a user
+      operationId: getUser
+      parameters: 
+      - name: id
+        type: number
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema: 
+           $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a user
+      operationId: updateUser
+      # define the parameters
+      tags:
+        - "update User"
+      parameters:
+        - name: id
+          description: user id
+          type: number
+          in: path
+          required: true
+        - in: body
+          name: user
+          description: The user to update.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+    delete:
+      description: delete a user
+      # define the parameters
+      parameters:
+        - name: id
+          description: user id
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
   
@@ -606,9 +705,9 @@ definitions:
       - phone
   OrganizationsListResponse:
     required:
-      - news
+      - organizations
     properties:
-      news:
+      organizations:
         type: array
         items:
           $ref: "#/definitions/GeneralObjectResponse"
@@ -648,9 +747,65 @@ definitions:
       - image
   AlliancesListResponse:
     required:
-      - news
+      - alliances
     properties:
-      news:
+      alliances:
+        type: array
+        items:
+          $ref: "#/definitions/GeneralObjectResponse"
+  User:
+    type: object
+    properties:
+      document_type:
+        type: string
+        description: Type of user document
+      document_number:
+        type: string
+        description: User's document number
+      first_name:
+        type: string
+        description: User's first name
+      last_name:
+        type: string
+        description: User's last name
+      address:
+        type: string
+        description: User's Address 
+      email:
+        type: string
+        description: User's email
+      phone:
+        type: string
+        description: User's phone
+      sex_birth:
+        type: string
+        description: User's birth sex
+      sexual_orientation:
+        type: string
+        description: Sexual orientation of the user
+      gender:
+        type: string
+        description: Gender of the user
+      birth_day:
+        type: string
+        description: User's birth day      
+    required:
+      - document_type
+      - document_number
+      - first_name
+      - last_name
+      - address
+      - email
+      - phone
+      - sex_birth
+      - sexual_orientation
+      - gender
+      - birth_day 
+  UserListResponse:
+    required:
+      - users
+    properties:
+      users:
         type: array
         items:
           $ref: "#/definitions/GeneralObjectResponse"
