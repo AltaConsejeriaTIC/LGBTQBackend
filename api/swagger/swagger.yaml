@@ -521,6 +521,105 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /complaints:
+    x-swagger-router-controller: complaint
+    get:
+      description: get the complaints list
+      operationId: getComplaints
+      tags:
+        - "get complaints"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ComplaintListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new complaint to the list
+      operationId: postComplaint
+      tags:
+        - "post complaint"
+      parameters:
+        - in: body
+          name: complaint
+          description: The complaint to create.
+          schema:
+            $ref: "#/definitions/Complaint"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /complaints/{id}:
+    x-swagger-router-controller: complaint
+    get:
+      description: get a complaint
+      operationId: getComplaint
+      parameters: 
+      - name: id
+        type: number
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema: 
+           $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a complaint
+      operationId: updateComplaint
+      # define the parameters
+      tags:
+        - "update Complaint"
+      parameters:
+        - name: id
+          description: complaint id
+          type: number
+          in: path
+          required: true
+        - in: body
+          name: complaint
+          description: The complaint to update.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+    delete:
+      description: delete a complaint
+      # define the parameters
+      parameters:
+        - name: id
+          description: complaint id
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
   
@@ -750,6 +849,54 @@ definitions:
       - alliances
     properties:
       alliances:
+        type: array
+        items:
+          $ref: "#/definitions/GeneralObjectResponse"
+  Complaint:
+    type: object
+    properties:
+      first_name:
+        type: string
+        description: First name of the complainant
+      last_name:
+        type: string
+        description: Last name of the complainant
+      document_type:
+        type: string
+        description: Type of document
+      document_number:
+        type: string
+        description: Document number
+      email:
+        type: string
+        description: complainant's mail
+      phone:
+        type: string
+        description: complainant's phone
+      event_date:
+        type: string
+        description: Date on which the event occurred
+      event_place:
+        type: string
+        description: Place where the event occurred
+      description:
+        type: string
+        description: Description of the situation of vulnerability
+    required:
+      - first_name
+      - last_name
+      - document_type
+      - document_number
+      - email
+      - phone
+      - event_date
+      - event_place
+      - description
+  ComplaintListResponse:
+    required:
+      - users
+    properties:
+      users:
         type: array
         items:
           $ref: "#/definitions/GeneralObjectResponse"
