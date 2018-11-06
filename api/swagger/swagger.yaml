@@ -894,9 +894,9 @@ definitions:
       - description
   ComplaintListResponse:
     required:
-      - users
+      - complaints
     properties:
-      users:
+      complaints:
         type: array
         items:
           $ref: "#/definitions/GeneralObjectResponse"

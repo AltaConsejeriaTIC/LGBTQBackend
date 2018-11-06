@@ -1,11 +1,10 @@
-const { Complaint } = require("objection");
+const { Model } = require("objection");
 
 class Complaint extends Model {
 
     static get tableName() {
-        return "users";
+        return "complaints";
     };
 }
-
 
 module.exports = { Complaint };

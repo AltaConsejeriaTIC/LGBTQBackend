@@ -15,7 +15,7 @@ function getComplaints(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findComplaints = () => Complaint.query().where('finish_date', ">=", getCurrentDate());
+const findComplaints = () => Complaint.query();
 
 function getCurrentDate() {
     return new Date();

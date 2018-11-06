@@ -15,7 +15,7 @@ function getUsers(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findUsers = () => User.query().where('finish_date', ">=", getCurrentDate());
+const findUsers = () => User.query();
 
 function getCurrentDate() {
     return new Date();
