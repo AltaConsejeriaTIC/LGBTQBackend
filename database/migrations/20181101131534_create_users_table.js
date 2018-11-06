@@ -9,7 +9,6 @@ exports.up = function(knex, Promise) {
             table.string('addres').notNullable();
             table.string('email').notNullable();
             table.string('phone').notNullable();
-            table.string('image').notNullable();
             table.string('sex_birth').notNullable();
             table.string("sexual_orientation").notNullable();
             table.string('gender').notNullable();
