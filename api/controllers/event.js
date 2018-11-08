@@ -87,7 +87,7 @@ const eventUpdated = (data, id) => Event.query()
         start_date: data.start_date,
         finish_date: data.finish_date,
         start_time: data.start_time,
-        finish_time: data.finish_date,
+        finish_time: data.finish_time,
         image: data.image,
         state: data.state,
         latitude: data.latitude,
