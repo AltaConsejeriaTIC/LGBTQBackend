@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    choice(name: "DEPLOYMENT_TYPE", choices: ["tag", "branch"], description: "Type of deployment?")
+    choice(name: "DEPLOYMENT_TYPE", choices: ["branch", "tag"], description: "Type of deployment?")
     string(name: "BRANCH", defaultValue: "develop", description: "What branch/tag do you want to run?")
   }
   stages {
