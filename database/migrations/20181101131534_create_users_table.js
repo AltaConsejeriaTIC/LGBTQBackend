@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
             table.string("sexual_orientation").notNullable();
             table.string('gender').notNullable();
             table.date('birth_day').notNullable();
+            table.string('education').notNullable();
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
         })
