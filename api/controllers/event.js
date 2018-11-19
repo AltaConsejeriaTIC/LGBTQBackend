@@ -51,23 +51,20 @@ const findEvent = (id) => Event.query().where('id', id).first();
 
 function postEvent(req, res) {
 
-    
-    // find the way to get the header parameter inside req
     const token = req.headers.token;
-
-    console.log('printing token header params: ', token);
-    console.log( 'checker: ', AdminHelper.authenticate(token));
-
-    if ( AdminHelper.authenticate(token) ){
-      insert(req.body)
-        .then(response => {
-            res.status(201).send({ id: response.id });
-        })
-        .catch(e => console.error(e));
-    } else{
-      res.status(403).send({ message: 'Forbidden permissions' });
-    } 
-
+    AdminHelper.authenticate(token)
+      .then( (response)=>{
+        if( response.length === 1 ){
+          insert(req.body)
+          .then(response => {
+              res.status(201).send({ id: response.id });
+          })
+          .catch(e => console.error(e));
+        }else{
+          res.status(403).send({ message: 'Forbidden permissions' });
+        }
+      })
+      .catch(e => console.error(e));
 }
 
 const insert = (event) => Event.query().insert(event);

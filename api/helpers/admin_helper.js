@@ -2,15 +2,14 @@
 
 const { Admin } = require('../../database/models/admin');
 
-const authenticate = ( token ) => {
-    
+const authenticate = ( token ) => new Promise( (resolve,reject) => {
   findUserByToken( token )
-    .then ( (Admin) => {
-      console.log(' printing response: \n', Admin  );
-      return true;
-    })
-    .catch((e) => console.error(e));
-}
+  .then ( (Admin) => {
+    resolve( Admin );
+  })
+  .catch((e) => reject(e) );
+})
+
 
 const findUserByToken = (token) => { return Admin.query().where('token', token) }
 
