@@ -30,11 +30,23 @@ function getAlliance(req, res) {
 const findAlliance = (id) => Alliance.query().where('id', id).first();
 
 function postAlliance(req, res) {
-    insert(req.body)
+
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        insert(req.body)
         .then(response => {
             res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+
+    
 }
 
 const insert = (alliance) => Alliance.query().insert(alliance);
@@ -43,7 +55,11 @@ function updateAlliance(req, res) {
 
     const id = req.swagger.params.id.value;
 
-    findAlliance(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findAlliance(id)
         .then(alliance => {
             if (!alliance) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -57,6 +73,11 @@ function updateAlliance(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));    
 }
 
 const allianceUpdated = (data, id) => Alliance.query()

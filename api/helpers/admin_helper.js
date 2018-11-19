@@ -2,7 +2,7 @@
 
 const { Admin } = require('../../database/models/admin');
 
-const authenticate = ( token ) => new Promise( (resolve,reject) => {
+const isAuthenticate = ( token ) => new Promise( (resolve,reject) => {
   findUserByToken( token )
   .then ( (Admin) => {
     resolve( Admin );
@@ -13,9 +13,7 @@ const authenticate = ( token ) => new Promise( (resolve,reject) => {
 
 const findUserByToken = (token) => { return Admin.query().where('token', token) }
 
-const getDummyFile = ( something ) => { return `guitar+${something}` }
 
 module.exports = {
-  authenticate,
-  getDummyFile
+  isAuthenticate
 }

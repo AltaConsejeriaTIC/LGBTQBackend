@@ -30,11 +30,22 @@ function getOrganization(req, res) {
 const findOrganization = (id) => Organization.query().where('id', id).first();
 
 function postOrganization(req, res) {
-    insert(req.body)
+
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        insert(req.body)
         .then(response => {
             res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+    
 }
 
 const insert = (organization) => Organization.query().insert(organization);
@@ -42,8 +53,11 @@ const insert = (organization) => Organization.query().insert(organization);
 function updateOrganization(req, res) {
 
     const id = req.swagger.params.id.value;
-
-    findOrganization(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findOrganization(id)
         .then(organization => {
             if (!organization) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -57,6 +71,11 @@ function updateOrganization(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
 }
 
 const organizationUpdated = (data, id) => Organization.query()

@@ -52,9 +52,9 @@ const findEvent = (id) => Event.query().where('id', id).first();
 function postEvent(req, res) {
 
     const token = req.headers.token;
-    AdminHelper.authenticate(token)
-      .then( (response)=>{
-        if( response.length === 1 ){
+    AdminHelper.isAuthenticate(token)
+      .then( (dataAdmin)=>{
+        if( dataAdmin.length === 1 ){
           insert(req.body)
           .then(response => {
               res.status(201).send({ id: response.id });
@@ -72,21 +72,34 @@ const insert = (event) => Event.query().insert(event);
 function updateEvent(req, res) {
 
     const id = req.swagger.params.id.value;
+    const token = req.headers.token;
 
-    findEvent(id)
-        .then(event => {
-            if (!event) {
-                res.status(400).send({ message: 'Invalid ID' });
-            } else {
-                eventUpdated(req.body, id)
-                    .then(response => {
-                        res.status(201).send({ id: response.id });
-                    })
-                    .catch((e) => console.error(e));
+    AdminHelper.isAuthenticate(token)
+      .then( (dataAdmin)=>{
+        if( dataAdmin.length === 1 ){
+          findEvent(id)
+            .then(event => {
+                if (!event) {
+                    res.status(400).send({ message: 'Invalid ID' });
+                } else {
+                    eventUpdated(req.body, id)
+                        .then(response => {
+                            res.status(201).send({ id: response.id });
+                        })
+                        .catch((e) => console.error(e));
 
-            }
-        })
-        .catch((e) => console.error(e));
+                }
+            })
+            .catch((e) => console.error(e));
+        }else{
+          res.status(403).send({ message: 'Forbidden permissions' });
+        }
+      })
+      .catch(e => console.error(e));
+
+
+
+    
 }
 
 const eventUpdated = (data, id) => Event.query()

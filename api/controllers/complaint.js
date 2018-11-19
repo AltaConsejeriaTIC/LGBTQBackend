@@ -40,10 +40,10 @@ const findComplaint = (id) => Complaint.query().where('id', id).first();
 
 function postComplaint(req, res) {
     insert(req.body)
-        .then(response => {
-            res.status(201).send({ id: response.id });
-        })
-        .catch(e => console.error(e));
+    .then(response => {
+        res.status(201).send({ id: response.id });
+    })
+    .catch(e => console.error(e));
 }
 
 const insert = (complaint) => Complaint.query().insert(complaint);
@@ -51,8 +51,11 @@ const insert = (complaint) => Complaint.query().insert(complaint);
 function updateComplaint(req, res) {
 
     const id = req.swagger.params.id.value;
-
-    findComplaint(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findComplaint(id)
         .then(complaint => {
             if (!complaint) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -66,6 +69,11 @@ function updateComplaint(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
 }
 
 const complaintUpdated = (data, id) => Complaint.query()
