@@ -67,6 +67,11 @@ paths:
       tags:
         - "post events"
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: event
           description: The event to create.

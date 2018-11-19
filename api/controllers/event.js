@@ -6,6 +6,7 @@ const database = require('knex')(configuration);
 const { Event } = require('../../database/models/event');
 const knex = require('knex');
 var util = require('util');
+const  AdminHelper = require('../helpers/admin_helper');
 
 function getEvents(req, res) {
     findEvents()
@@ -49,11 +50,24 @@ function getEvent(req, res) {
 const findEvent = (id) => Event.query().where('id', id).first();
 
 function postEvent(req, res) {
-    insert(req.body)
+
+    
+    // find the way to get the header parameter inside req
+    const token = req.headers.token;
+
+    console.log('printing token header params: ', token);
+    console.log( 'checker: ', AdminHelper.authenticate(token));
+
+    if ( AdminHelper.authenticate(token) ){
+      insert(req.body)
         .then(response => {
             res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
+    } else{
+      res.status(403).send({ message: 'Forbidden permissions' });
+    } 
+
 }
 
 const insert = (event) => Event.query().insert(event);
