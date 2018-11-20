@@ -6,6 +6,7 @@ const database = require('knex')(configuration);
 const { Complaint } = require('../../database/models/complaint');
 const knex = require('knex');
 var util = require('util');
+const  AdminHelper = require('../helpers/admin_helper');
 
 function getComplaints(req, res) {
     findComplaints()

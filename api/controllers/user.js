@@ -6,6 +6,7 @@ const database = require('knex')(configuration);
 const { User } = require('../../database/models/user');
 const knex = require('knex');
 var util = require('util');
+const  AdminHelper = require('../helpers/admin_helper');
 
 function getUsers(req, res) {
     findUsers()

@@ -1,6 +1,7 @@
 'use strict';
 
 const { News } = require('../../database/models/news');
+const  AdminHelper = require('../helpers/admin_helper');
 
 
 function getNews(req, res) {
