@@ -15,7 +15,8 @@ exports.seed = function(knex, Promise) {
                     sex_birth: 'Hombre',
                     sexual_orientation: 'XXXXX',
                     gender: 'XXXXX',
-                    birth_day: '1995-11-11'
+                    birth_day: '1995-11-11',
+                    education: 'Ninguno'
                 },
                 {
                     id: 2,
@@ -29,7 +30,8 @@ exports.seed = function(knex, Promise) {
                     sex_birth: 'Mujer',
                     sexual_orientation: 'XXXXX',
                     gender: 'XXXXX',
-                    birth_day: '1996-06-15'
+                    birth_day: '1996-06-15',
+                    education: 'Básica primaria'
                 },
                 {
                     id: 3,
@@ -43,7 +45,8 @@ exports.seed = function(knex, Promise) {
                     sex_birth: 'Hombre',
                     sexual_orientation: 'XXXXX',
                     gender: 'XXXXX',
-                    birth_day: '1997-03-04'
+                    birth_day: '1997-03-04',
+                    education: 'Tecnólogo'
                 }
             ]);
         });

@@ -30,19 +30,34 @@ function getNewsId(req, res) {
 const findNewsId = (id) => News.query().where('id', id).first();
 
 function postNews(req, res) {
-    insert(req.body)
+
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        insert(req.body)
         .then(response => {
             res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+
+    
 }
 const insert = (news) => News.query().insert(news);
 
 function updateNews(req, res) {
 
     const id = req.swagger.params.id.value;
-
-    findNewsId(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findNewsId(id)
         .then(news => {
             if (!news) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -55,6 +70,13 @@ function updateNews(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+
+    
 
 }
 
@@ -73,8 +95,11 @@ const newsUpdated = (data, id) => News.query()
 
 function deleteNewsId(req, res) {
     const id = req.swagger.params.id.value;
-
-    findNewsId(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findNewsId(id)
         .then(news => {
             if (!news) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -88,6 +113,12 @@ function deleteNewsId(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+
 }
 
 

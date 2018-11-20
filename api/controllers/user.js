@@ -51,8 +51,11 @@ const insert = (user) => User.query().insert(user);
 function updateUser(req, res) {
 
     const id = req.swagger.params.id.value;
-
-    findUser(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findUser(id)
         .then(user => {
             if (!user) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -66,6 +69,13 @@ function updateUser(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+
+    
 }
 
 const userUpdated = (data, id) => User.query()

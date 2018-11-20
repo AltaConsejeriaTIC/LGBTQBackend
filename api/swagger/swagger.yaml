@@ -67,6 +67,11 @@ paths:
       tags:
         - "post events"
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: event
           description: The event to create.
@@ -128,6 +133,11 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: event
           description: The event to update.
@@ -182,6 +192,11 @@ paths:
       description: add a news to the list
       operationId: postNews
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: news
           description: News to create.
@@ -227,6 +242,11 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: news
           description: The news to update.
@@ -252,6 +272,11 @@ paths:
           description: news id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
       responses:
         "200":
@@ -282,6 +307,11 @@ paths:
       description: add a new organization to the list
       operationId: postOrganization
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: organization
           description: The organization to create.
@@ -327,6 +357,11 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: organization
           description: The organization to update.
@@ -363,6 +398,11 @@ paths:
       tags:
         - "post alliances"
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: alliance
           description: The alliance to create.
@@ -407,6 +447,11 @@ paths:
           description: alliance id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
         - in: body
           name: alliance
@@ -488,6 +533,11 @@ paths:
           description: user id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
         - in: body
           name: user
@@ -587,6 +637,11 @@ paths:
           description: complaint id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
         - in: body
           name: complaint
