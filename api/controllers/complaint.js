@@ -7,6 +7,21 @@ const { Complaint } = require('../../database/models/complaint');
 const knex = require('knex');
 var util = require('util');
 const  AdminHelper = require('../helpers/admin_helper');
+const Joi = require('joi');
+
+const schema = Joi.object().keys({
+
+  first_name: Joi.string().regex(/^[a-záéíóúñüçA-ZÁÉÍÓÚ´ÑÜÇ\s]*$/i).required(),
+  last_name: Joi.string().regex(/^[a-záéíóúñüçA-ZÁÉÍÓÚ´ÑÜÇ\s]*$/i).required(),
+  document_type: Joi.string().max(20).required(),
+  document_number: Joi.string().max(15).required(),
+  email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
+  phone: Joi.string().regex(/^[0-9]*$/).required(),
+  event_day: Joi.date().max('now').required(),
+  event_place: Joi.string().required(),
+  description: Joi.string().required()
+
+});
 
 function getComplaints(req, res) {
     findComplaints()
@@ -40,11 +55,24 @@ function getComplaint(req, res) {
 const findComplaint = (id) => Complaint.query().where('id', id).first();
 
 function postComplaint(req, res) {
-    insert(req.body)
-    .then(response => {
-        res.status(201).send({ id: response.id });
-    })
-    .catch(e => console.error(e));
+    const data = req.body;
+    Joi.validate(data, schema, (err, value) => {
+
+      if (err) {
+        res.status(422).json({
+            status: 'error',
+            message: 'Invalid request data',
+            error: err
+        });
+    } else {
+        insert(data)
+          .then(response => {
+              res.status(201).send({ id: response.id });
+          })
+          .catch(e => console.error(e));
+    }
+
+    }); 
 }
 
 const insert = (complaint) => Complaint.query().insert(complaint);
