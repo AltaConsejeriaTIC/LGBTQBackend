@@ -7,6 +7,24 @@ const { User } = require('../../database/models/user');
 const knex = require('knex');
 var util = require('util');
 const  AdminHelper = require('../helpers/admin_helper');
+const Joi = require('joi');
+
+const schema = Joi.object().keys({
+
+  document_type: Joi.string().max(20).required(),
+  document_number: Joi.string().max(15).required(),
+  first_name: Joi.string().regex(/^[a-záéíóúñüçA-ZÁÉÍÓÚ´ÑÜÇ\s]*$/i).required(),
+  last_name: Joi.string().regex(/^[a-záéíóúñüçA-ZÁÉÍÓÚ´ÑÜÇ\s]*$/i).required(),
+  address: Joi.string().required(),
+  email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
+  phone: Joi.string().regex(/^[0-9]*$/).required(),
+  sex_birth: Joi.string().required(),
+  sexual_orientation: Joi.string().required(),
+  gender: Joi.string().required(),
+  birth_day: Joi.date().max('now').required(),
+  education: Joi.string().required()
+
+});
 
 function getUsers(req, res) {
     findUsers()
@@ -39,11 +57,22 @@ function getUser(req, res) {
 const findUser = (id) => User.query().where('id', id).first();
 
 function postUser(req, res) {
-    insert(req.body)
+  const data = req.body;
+  Joi.validate(data, schema, (err, value) => {
+    if (err) {
+      res.status(422).json({
+          status: 'error',
+          message: 'Invalid request data',
+          error: err
+      });
+    } else {
+        insert(data)
         .then(response => {
             res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
+    }
+  });   
 }
 
 const insert = (user) => User.query().insert(user);

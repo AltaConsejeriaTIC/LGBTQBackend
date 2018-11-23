@@ -928,7 +928,7 @@ definitions:
       phone:
         type: string
         description: complainant's phone
-      event_date:
+      event_day:
         type: string
         description: Date on which the event occurred
       event_place:
@@ -944,7 +944,7 @@ definitions:
       - document_number
       - email
       - phone
-      - event_date
+      - event_day
       - event_place
       - description
   ComplaintListResponse:
