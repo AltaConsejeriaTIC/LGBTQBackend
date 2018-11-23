@@ -89,7 +89,7 @@ const organizationUpdated = (data, id) => Organization.query()
         phone: data.phone,
         state: data.state,
         image: data.image,
-        updated_at: getCurrentDate()
+        updated_at: new Date()
     });
 
 

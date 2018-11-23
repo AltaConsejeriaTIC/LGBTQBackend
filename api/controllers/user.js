@@ -20,7 +20,6 @@ const findUsers = () => User.query();
 
 function getCurrentDate() {
     return new Date();
-    //return new Date().toISOString().split('T')[0];
 }
 
 function getUser(req, res) {

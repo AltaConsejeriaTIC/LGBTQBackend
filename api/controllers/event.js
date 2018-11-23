@@ -29,8 +29,7 @@ function getAllEvents(req, res) {
 const findAllEvents = () => Event.query()
 
 function getCurrentDate() {
-    return new Date();
-    //return new Date().toISOString().split('T')[0];
+    return new Date();    
 }
 
 function getEvent(req, res) {

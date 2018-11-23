@@ -92,7 +92,7 @@ const allianceUpdated = (data, id) => Alliance.query()
         state: data.state,
         finish_date: data.finish_date,
         image: data.image,
-        updated_at: getCurrentDate()
+        updated_at: new Date()
     });
 
 

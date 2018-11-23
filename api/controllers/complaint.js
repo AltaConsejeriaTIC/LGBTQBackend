@@ -19,8 +19,7 @@ function getComplaints(req, res) {
 const findComplaints = () => Complaint.query();
 
 function getCurrentDate() {
-    return new Date();
-    //return new Date().toISOString().split('T')[0];
+    return new Date();    
 }
 
 function getComplaint(req, res) {
