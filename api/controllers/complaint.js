@@ -8,6 +8,9 @@ const knex = require('knex');
 var util = require('util');
 const  AdminHelper = require('../helpers/admin_helper');
 const Joi = require('joi');
+const nodemailer = require('nodemailer');
+const xoauth2 = require('xoauth2');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 const schema = Joi.object().keys({
 
@@ -22,6 +25,20 @@ const schema = Joi.object().keys({
   description: Joi.string().required()
 
 });
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    type: 'OAuth2',
+    user: 'jaavargasar@gmail.com',
+    clientId: '1061380231102-419kptaqqnclhc6kbjrn2damhsa1n3kq.apps.googleusercontent.com',
+    clientSecret: 'Mr4gVF6PESAbmyn_F6wHso2P',
+    refreshToken: '1/EJZSIFSP_56DpSVjVQRMq7_JAy7Ay_AZald_2IY4j4A'
+  }
+ })
 
 function getComplaints(req, res) {
     findComplaints()
@@ -64,9 +81,26 @@ function postComplaint(req, res) {
             error: err
         });
     } else {
+    
+        const mailOptions = {
+          from: 'My Name <jaavargasar@gmail.com>',
+          to: 'jaavargasar@gmail.com',
+          subject: 'Nodemailer test',
+          text: '<p>sdfsdfsdf</p>'
+        }
+      
         insert(data)
           .then(response => {
-              res.status(201).send({ id: response.id });
+            transporter.sendMail(mailOptions, function (err, res) {
+              if(err){
+                  console.log('Error');
+                  console.log(err)
+              } else {
+                  console.log('Email Sent');
+              }
+            })
+            
+            res.status(201).send({ id: response.id });
           })
           .catch(e => console.error(e));
     }
