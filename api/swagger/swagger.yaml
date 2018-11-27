@@ -51,7 +51,7 @@ paths:
       description: get the events list
       operationId: getEvents
       tags:
-        - "get events"
+        - "events"
       responses:
         "200":
           description: Success
@@ -65,7 +65,7 @@ paths:
       description: add a new event to the list
       operationId: postEvent
       tags:
-        - "post events"
+        - "events"
       parameters:
         - in: header
           name: token
@@ -92,7 +92,7 @@ paths:
       description: get the events list
       operationId: getAllEvents
       tags:
-        - "get events"
+        - "events"
       responses:
         "200":
           description: Success
@@ -720,6 +720,7 @@ paths:
     x-swagger-router-controller: highlight
     delete:
       description: delete a highlight
+      operationId: deleteHighlight
       tags:
         - "delete highlights"
       # define the parameters
@@ -728,6 +729,11 @@ paths:
           description: highlight id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
       responses:
         "200":

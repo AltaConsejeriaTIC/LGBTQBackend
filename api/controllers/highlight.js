@@ -19,21 +19,6 @@ function getHighlights(req, res) {
 
 const findHighlights = () => Highlight.query();
 
-function getAllHighlights(req, res) {
-    findAllHighlights()
-        .then((highlights) => {
-            res.status(200).send(highlights);
-        })
-        .catch((e) => console.error(e));
-}
-
-const findAllHighlights = () => Highlight.query()
-
-function getCurrentDate() {
-    return new Date();
-    //return new Date().toISOString().split('T')[0];
-}
-
 function getHighlight(req, res) {
     const id = req.swagger.params.id.value;
 
@@ -94,7 +79,7 @@ function deleteHighlight(req, res) {
                             highlightDeleted(id)
                                 .then(response => {
                                     console.log('response', response);
-                                    res.status(200).send({ success: response, description: 'Success news deleted' });
+                                    res.status(200).send({ success: response, description: 'Success highligh deleted' });
                                 })
                                 .catch((e) => console.error(e));
                         }
@@ -115,7 +100,6 @@ const highlightDeleted = (id) => Highlight.query().deleteById(id)
 
 module.exports = {
     getHighlights,
-    getAllHighlights,
     getHighlight,
     postHighlight,
     deleteHighlight
