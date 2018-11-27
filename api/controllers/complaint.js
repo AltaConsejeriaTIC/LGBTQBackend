@@ -33,10 +33,10 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     type: 'OAuth2',
-    user: 'jaavargasar@gmail.com',
-    clientId: '1061380231102-419kptaqqnclhc6kbjrn2damhsa1n3kq.apps.googleusercontent.com',
-    clientSecret: 'Mr4gVF6PESAbmyn_F6wHso2P',
-    refreshToken: '1/EJZSIFSP_56DpSVjVQRMq7_JAy7Ay_AZald_2IY4j4A'
+    user: 'diversidadsexual@sdp.gov.co',
+    clientId: '788019342140-ts5tlhr23etdn902imrlgvq8ad2185b0.apps.googleusercontent.com',
+    clientSecret: 'PiSpgLkk3cRyCYOpJ8gLG3SX',
+    refreshToken: '1/u-ALWdCIyOST2tHJ_-uc9xXZCq7sJWeQ_07Po-RnD9k'
   }
  })
 
@@ -74,26 +74,26 @@ function postComplaint(req, res) {
     const data = req.body;
     Joi.validate(data, schema, (err, value) => {
 
-      if (err) {
-        res.status(422).json({
-            status: 'error',
-            message: 'Invalid request data',
-            error: err
-        });
-    } else {
+        if (err) {
+          res.status(422).json({
+              status: 'error',
+              message: 'Invalid request data',
+              error: err
+          });
+        } else {
     
         const mailOptions = {
-          from: 'My Name <jaavargasar@gmail.com>',
-          to: 'jaavargasar@gmail.com',
+          from: 'Diversidad Sexual <diversidadsexual@sdp.gov.co>',
+          to: 'diversidadsexual@sdp.gov.co',
           subject: 'Nodemailer test',
-          text: '<p>sdfsdfsdf</p>'
+          text: 'Prueba aplicacion movil en bogota se puede ser'
         }
       
         insert(data)
           .then(response => {
-            transporter.sendMail(mailOptions, function (err, res) {
+            transporter.sendMail(mailOptions, function (err, res) { 
               if(err){
-                  console.log('Error');
+                  console.log('Error sending email');
                   console.log(err)
               } else {
                   console.log('Email Sent');
