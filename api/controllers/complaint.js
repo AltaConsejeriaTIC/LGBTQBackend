@@ -82,11 +82,33 @@ function postComplaint(req, res) {
           });
         } else {
     
+        const output = `
+          <p>Prueba aplicacion movil en bogota se puede ser</p>
+          <h3> Datos de la denuncia</h3>
+          <ul>
+            <li><b>Nombre<b>: ${data.first_name} ${data.last_name}</li>
+            <li>Tipo de documento de identidad: ${data.document_type}</li>
+            <li>Número de documento: <b>${data.document_number}</b></li>
+            <li>Correo electrónico: <b>${data.email}</b></li>
+            <li>Teléfono fijo o celular: <b>${data.phone}</b></li>
+            <li>Fecha del suceso: <b>${data.event_day}</b></li>
+            <li>Lugar del suceso: ${data.event_place}</li>
+            <li>Descripción de la situación: ${data.description}</li>
+          </ul>
+          <img src="cid:unique@kreata.ee"/>
+          
+        `
         const mailOptions = {
           from: 'Diversidad Sexual <diversidadsexual@sdp.gov.co>',
           to: 'diversidadsexual@sdp.gov.co',
           subject: 'Nodemailer test',
-          text: 'Prueba aplicacion movil en bogota se puede ser'
+          text: '',
+          html: output,
+          attachments: [{
+            filename: 'organización03',
+            path: `./public/images/organización03.JPG`,
+            cid: 'unique@kreata.ee'
+        }]
         }
       
         insert(data)
