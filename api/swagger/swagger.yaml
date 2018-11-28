@@ -211,6 +211,22 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /allnews:
+    x-swagger-router-controller: news
+    get:
+      description: get all news list
+      operationId: getAllNews
+      tags:
+        - "get news"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/NewsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /news/{id}:
     x-swagger-router-controller: news
     get:

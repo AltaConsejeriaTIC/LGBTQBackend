@@ -11,6 +11,7 @@ const  AdminHelper = require('../helpers/admin_helper');
 function getEvents(req, res) {
     findEvents()
         .then((events) => {
+            events.sort(( x, y ) => y.updated_at - x.updated_at);
             res.status(200).send(events);
         })
         .catch((e) => console.error(e));
@@ -21,6 +22,7 @@ const findEvents = () => Event.query().where('finish_date', ">=", getCurrentDate
 function getAllEvents(req, res) {
     findAllEvents()
         .then((events) => {
+            events.sort(( x, y ) => y.updated_at - x.updated_at);
             res.status(200).send(events);
         })
         .catch((e) => console.error(e));
@@ -94,11 +96,7 @@ function updateEvent(req, res) {
           res.status(403).send({ message: 'Forbidden permissions' });
         }
       })
-      .catch(e => console.error(e));
-
-
-
-    
+      .catch(e => console.error(e));  
 }
 
 const eventUpdated = (data, id) => Event.query()
