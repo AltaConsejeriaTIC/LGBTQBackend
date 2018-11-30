@@ -18,7 +18,7 @@ exports.seed = function(knex, Promise) {
                     email: 'talentodiverso@cclgbt.co',
                     state: true,
                     finish_date: '2018-11-12',
-                    image: '/images/aliado01.jpg',
+                    image: '/images/Aliado01.jpg',
                 },
                 {
                     id: 2,
@@ -33,7 +33,7 @@ exports.seed = function(knex, Promise) {
                     email: 'info@ccb.org.co',
                     state: true,
                     finish_date: '2018-12-02',
-                    image: '/images/aliado02.jpg',
+                    image: '/images/Aliado02.jpg',
                 },
                 {
                     id: 3,
@@ -47,7 +47,7 @@ exports.seed = function(knex, Promise) {
                     email: 'info@tostaocafeypan.com',
                     state: true,
                     finish_date: '2018-11-30',
-                    image: '/images/aliado03.jpg',
+                    image: '/images/Aliado03.jpg',
                 }
             ]);
         });

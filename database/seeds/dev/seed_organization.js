@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
                     email: 'jotavillota2007@yahoo.com',
                     phone: '+57 (2) 7203733',
                     state: true,
-                    image: '/images/organizacion01.jpg',
+                    image: '/images/organización01.jpg',
                 },
                 {
                     id: 2,
@@ -28,7 +28,7 @@ exports.seed = function(knex, Promise) {
                     email: 'armarioabierto.lgbti@gmail.com',
                     phone: '(+57) 4831237',
                     state: true,
-                    image: '/images/organizacion02.jpg',
+                    image: '/images/organización02.jpg',
                 },
                 {
                     id: 3,
@@ -41,7 +41,7 @@ exports.seed = function(knex, Promise) {
                     email: 'info@colombiadiversa.org',
                     phone: '(+57) 4831237',
                     state: true,
-                    image: '/images/organizacion03.jpg',
+                    image: '/images/organización03.JPG',
                 }
             ]);
         });
