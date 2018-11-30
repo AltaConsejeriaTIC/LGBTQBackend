@@ -6,7 +6,7 @@ const database = require('knex')(configuration);
 const { Event } = require('../../database/models/event');
 const knex = require('knex');
 var util = require('util');
-const  AdminHelper = require('../helpers/admin_helper');
+const AdminHelper = require('../helpers/admin_helper');
 
 function getEvents(req, res) {
     findEvents()
@@ -31,7 +31,7 @@ function getAllEvents(req, res) {
 const findAllEvents = () => Event.query()
 
 function getCurrentDate() {
-    return new Date();    
+    return new Date();
 }
 
 function getEvent(req, res) {
@@ -54,18 +54,18 @@ function postEvent(req, res) {
 
     const token = req.headers.token;
     AdminHelper.isAuthenticate(token)
-      .then( (dataAdmin)=>{
-        if( dataAdmin.length === 1 ){
-          insert(req.body)
-          .then(response => {
-              res.status(201).send({ id: response.id });
-          })
-          .catch(e => console.error(e));
-        }else{
-          res.status(403).send({ message: 'Forbidden permissions' });
-        }
-      })
-      .catch(e => console.error(e));
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
+                insert(req.body)
+                    .then(response => {
+                        res.status(201).send({ id: response.id });
+                    })
+                    .catch(e => console.error(e));
+            } else {
+                res.status(403).send({ message: 'Forbidden permissions' });
+            }
+        })
+        .catch(e => console.error(e));
 }
 
 const insert = (event) => Event.query().insert(event);
@@ -76,18 +76,18 @@ function updateEvent(req, res) {
     const token = req.headers.token;
 
     AdminHelper.isAuthenticate(token)
-      .then( (dataAdmin)=>{
-        if( dataAdmin.length === 1 ){
-          findEvent(id)
-            .then(event => {
-                if (!event) {
-                    res.status(400).send({ message: 'Invalid ID' });
-                } else {
-                    eventUpdated(req.body, id)
-                        .then(response => {
-                            res.status(201).send({ id: response.id });
-                        })
-                        .catch((e) => console.error(e));
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
+                findEvent(id)
+                    .then(event => {
+                        if (!event) {
+                            res.status(400).send({ message: 'Invalid ID' });
+                        } else {
+                            eventUpdated(req.body, id)
+                                .then(response => {
+                                    res.status(201).send({ id: response.id });
+                                })
+                                .catch((e) => console.error(e));
 
                 }
             })
@@ -96,7 +96,7 @@ function updateEvent(req, res) {
           res.status(403).send({ message: 'Forbidden permissions' });
         }
       })
-      .catch(e => console.error(e));  
+      .catch(e => console.error(e));
 }
 
 const eventUpdated = (data, id) => Event.query()
