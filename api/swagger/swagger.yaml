@@ -51,7 +51,7 @@ paths:
       description: get the events list
       operationId: getEvents
       tags:
-        - "get events"
+        - "events"
       responses:
         "200":
           description: Success
@@ -65,7 +65,7 @@ paths:
       description: add a new event to the list
       operationId: postEvent
       tags:
-        - "post events"
+        - "events"
       parameters:
         - in: header
           name: token
@@ -92,7 +92,7 @@ paths:
       description: get the events list
       operationId: getAllEvents
       tags:
-        - "get events"
+        - "events"
       responses:
         "200":
           description: Success
@@ -691,6 +691,75 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /highlights:
+    x-swagger-router-controller: highlight
+    get:
+      description: get the highlights list
+      operationId: getHighlights
+      tags:
+        - "get highlights"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HighlightListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new highlight to the list
+      operationId: postHighlight
+      tags:
+        - "post highlights"
+      parameters:
+        - in: header
+          name: token
+          description: highlight token
+          type: string
+          required: true
+        - in: body
+          name: highlight
+          description: The highlight to create.
+          schema:
+            $ref: "#/definitions/Highlight"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /highlights/{id}:
+    x-swagger-router-controller: highlight
+    delete:
+      description: delete a highlight
+      operationId: deleteHighlight
+      tags:
+        - "delete highlights"
+      # define the parameters
+      parameters:
+        - name: id
+          description: highlight id
+          type: number
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
   
@@ -1027,3 +1096,23 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GeneralObjectResponse"
+  Highlight:
+    type: object
+    properties:
+      section_id:
+        type: number
+        description: Id of the highligh in the respective section
+      section:
+        type: string
+        description: Section in which the highlight is      
+    required:
+      - section_id
+      - section      
+  HighlightListResponse:
+    required:
+      - highlights
+    properties:
+      highlights:
+        type: array
+        items:
+          $ref: "#/definitions/GeneralObjectResponse"        
