@@ -26,7 +26,7 @@ function getAllEvents(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAllEvents = () => Event.query()
+const findAllEvents = () => Event.query().where('finish_date', ">=", getCurrentDate()).andWhere('state', 'true').orderBy('start_date');
 
 function getCurrentDate() {
     return new Date();
@@ -68,7 +68,7 @@ function postEvent(req, res) {
 
 const insert = (event) => Event.query().insert(event);
 
-function updateEvent(req, res) {
+function updateState(req, res) {
 
     const id = req.swagger.params.id.value;
     const token = req.headers.token;
@@ -81,7 +81,39 @@ function updateEvent(req, res) {
                         if (!event) {
                             res.status(400).send({ message: 'Invalid ID' });
                         } else {
-                            eventUpdated(req.body, id)
+                            stateUpdated(req.body, id)
+                                .then(response => {
+                                    res.status(200).send({ id: response.id });
+                                })
+                                .catch((e) => console.error(e));
+
+                        }
+                    })
+                    .catch((e) => console.error(e));
+            } else {
+                res.status(403).send({ message: 'Forbidden permissions' });
+            }
+        })
+        .catch(e => console.error(e));
+
+}
+
+function updateEvent(req, res) {
+
+    const id = req.swagger.params.id.value;
+    const token = req.headers.token;
+
+    AdminHelper.isAuthenticate(token)
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
+                findEvent(id)
+                    .then(event => {
+                        console.log(req.body);
+                        if (!event) {
+                            res.status(400).send({ message: 'Invalid ID' });
+                        } else {
+                            let state = req.body === "true";
+                            eventUpdated(state, id)
                                 .then(response => {
                                     res.status(201).send({ id: response.id });
                                 })
@@ -118,11 +150,17 @@ const eventUpdated = (data, id) => Event.query()
         updated_at: getCurrentDate()
     });
 
+const stateUpdated = (data, id) => Event.query()
+    .patchAndFetchById(id, {
+        state: data
+    });
+
 
 module.exports = {
     getEvents,
     getAllEvents,
     getEvent,
     postEvent,
-    updateEvent
+    updateEvent,
+    updateState
 };

@@ -151,7 +151,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            $ref: "#/definitions/ErrorResponse"
     delete:
       description: delete a event
       # define the parameters
@@ -166,6 +166,38 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateEvenState/{id}:
+    x-swagger-router-controller: event
+    put:
+      tags:
+        - "events"
+      description: Update state of the event
+      operationId: updateState
+      parameters:
+        - name: id 
+          description: event id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            type: string
+          required: true
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -293,7 +325,7 @@ paths:
       description: get the organizations list
       operationId: getOrganizations
       tags:
-        - "get organizations"
+        - "organizations"
       responses:
         "200":
           description: Success
@@ -306,6 +338,8 @@ paths:
     post:
       description: add a new organization to the list
       operationId: postOrganization
+      tags:
+        - "organizations"
       parameters:
         - in: header
           name: token
@@ -331,6 +365,8 @@ paths:
     get:
       description: get an organization
       operationId: getOrganization
+      tags:
+        - "organizations"
       parameters: 
       - name: id
         type: number
@@ -348,9 +384,8 @@ paths:
     put:
       description: update an organization
       operationId: updateOrganization
-      # define the parameters
       tags:
-        - "update Organization"
+        - "organizations"
       parameters:
         - name: id
           description: organization id
@@ -809,7 +844,7 @@ definitions:
         type: string
         description: End time of the event
       state:
-        type: boolean
+        type: string
         description: indicates if the event is 'noted' or no
       image:
         type: string
@@ -864,7 +899,7 @@ definitions:
         type: string
         description: Source of the news
       state:
-        type: boolean
+        type: string
         description: State of the event (published, not published)
       image_owner:
         type: string
@@ -914,7 +949,7 @@ definitions:
         type: string
         description: Phone of the organization
       state:
-        type: boolean
+        type: string
         description: indicates if the organization is 'noted' or no
       image:
         type: string
@@ -953,7 +988,7 @@ definitions:
         type: string
         description: Phone of the alliance
       state:
-        type: boolean
+        type: string
         description: indicates if the alliance is 'noted' or no
       finish_date:
         type: string
