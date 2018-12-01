@@ -2,7 +2,6 @@ exports.seed = function(knex, Promise) {
     return knex('events').del()
         .then(function() {
             return knex('events').insert([{
-                    id: 1,
                     title: 'Ciclo Rosa 2018 - Muestras audiovisuales',
                     description: 'El Ciclo Rosa celebra 17 años de ediciones anuales en la capital y se une a la conmemoración de los 10 años de la política pública LGBT del Distrito. A un año de cumplir la mayoría de edad, este ciclo sigue teniendo además programación en Medellín y Cali, con una muestra de la programación que inicia en Bogotá el 28 de junio y culmina el 10 de julio en la Cinemateca Distrital.',
                     place: 'Cinemateca Distrital',
@@ -17,7 +16,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.070948
                 },
                 {
-                    id: 2,
                     title: 'Shakespeare enamorado',
                     description: 'Género: Una comedia romántica que te hará reir de principio a fin con su ' +
                         'fino humor inglés.Es una producción con toda la magia y calidad de Disney.En 1999 ' +
@@ -40,7 +38,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.074396
                 },
                 {
-                    id: 3,
                     title: 'Marcha por el orgullo LGBT en Bogotá',
                     description: 'La marcha número 12 por el orgullo gay recorrerá este domingo desde el Parque Nacional hasta la Plaza de Bolívar. La carrera séptima será el punto de partida. Gays, transexuales, transformistas, lesbianas, intersexuales y heterosexuales se reunierán el primero de julio y celebrarán la diversidad bajo un cielo azul claro y un sol intenso, digno de un domingo en Bogotá.',
                     place: 'Parque Nacional',
@@ -55,7 +52,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.063663
                 },
                 {
-                    id: 4,
                     title: 'Festival Internacional Ni con el pétalo de una rosa',
                     description: 'El festival nace de la campaña liderada por la actriz y directora e Casa E, Alejandra Borrero, Ni con el pétalo de una rosa, que es una iniciativa que ha generado varias acciones en el transcurso de los últimos años. El festival busca ser un encuentro para la reflexión sobre la violencia que ha sufrido la mujer a través de la historia del país y su nuevo papel en el posible postconflicto.',
                     place: 'Casa ensamble',
@@ -70,7 +66,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.075251
                 },
                 {
-                    id: 5,
                     title: 'Exilia2 Teatro - Las mujeres de Lorca',
                     description: 'Obra que gira en torno a cuatro mujeres icónicas del poeta Federico García Lorca en la que se origina un encuentro inédito en torno a las pasiones, alegrías y sufrimientos que motivan la existencia de cada una de ellas.',
                     place: 'Teatro Mayor Julio Mario Santo Domingo',
@@ -84,7 +79,6 @@ exports.seed = function(knex, Promise) {
                     latitude: 4.756900,
                     longitude: -74.062581
                 },{
-                    id: 6,
                     title: '2.0-Ciclo Rosa 2018 - Muestras audiovisuales',
                     description: 'El Ciclo Rosa celebra 17 años de ediciones anuales en la capital y se une a la conmemoración de los 10 años de la política pública LGBT del Distrito. A un año de cumplir la mayoría de edad, este ciclo sigue teniendo además programación en Medellín y Cali, con una muestra de la programación que inicia en Bogotá el 28 de junio y culmina el 10 de julio en la Cinemateca Distrital.',
                     place: 'Cinemateca Distrital',
@@ -99,7 +93,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.070948
                 },
                 {
-                    id: 7,
                     title: '2.0-Shakespeare enamorado',
                     description: 'Género: Una comedia romántica que te hará reir de principio a fin con su ' +
                         'fino humor inglés.Es una producción con toda la magia y calidad de Disney.En 1999 ' +
@@ -122,7 +115,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.074396
                 },
                 {
-                    id: 8,
                     title: '2.0-Marcha por el orgullo LGBT en Bogotá',
                     description: 'La marcha número 12 por el orgullo gay recorrerá este domingo desde el Parque Nacional hasta la Plaza de Bolívar. La carrera séptima será el punto de partida. Gays, transexuales, transformistas, lesbianas, intersexuales y heterosexuales se reunierán el primero de julio y celebrarán la diversidad bajo un cielo azul claro y un sol intenso, digno de un domingo en Bogotá.',
                     place: 'Parque Nacional',
@@ -137,7 +129,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.063663
                 },
                 {
-                    id: 9,
                     title: '2.0-Festival Internacional Ni con el pétalo de una rosa',
                     description: 'El festival nace de la campaña liderada por la actriz y directora e Casa E, Alejandra Borrero, Ni con el pétalo de una rosa, que es una iniciativa que ha generado varias acciones en el transcurso de los últimos años. El festival busca ser un encuentro para la reflexión sobre la violencia que ha sufrido la mujer a través de la historia del país y su nuevo papel en el posible postconflicto.',
                     place: 'Casa ensamble',
@@ -152,7 +143,6 @@ exports.seed = function(knex, Promise) {
                     longitude: -74.075251
                 },
                 {
-                    id: 10,
                     title: '2.0-Exilia2 Teatro - Las mujeres de Lorca',
                     description: 'Obra que gira en torno a cuatro mujeres icónicas del poeta Federico García Lorca en la que se origina un encuentro inédito en torno a las pasiones, alegrías y sufrimientos que motivan la existencia de cada una de ellas.',
                     place: 'Teatro Mayor Julio Mario Santo Domingo',

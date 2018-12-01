@@ -1076,6 +1076,9 @@ definitions:
       birth_day:
         type: string
         description: User's birth day      
+      education:
+        type: string
+        description: User's education
     required:
       - document_type
       - document_number
@@ -1087,7 +1090,8 @@ definitions:
       - sex_birth
       - sexual_orientation
       - gender
-      - birth_day 
+      - birth_day
+      - education
   UserListResponse:
     required:
       - users

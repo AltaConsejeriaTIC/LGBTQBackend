@@ -2,7 +2,6 @@ exports.seed = function(knex, Promise) {
     return knex('organizations').del()
         .then(function() {
             return knex('organizations').insert([{
-                    id: 1,
                     name: 'Ágora Club',
                     description: 'ÁGORA Club, es el nombre adoptado por un grupo de personas interesadas en el trabajo' +
                         ' en pro de la construcción de lo que hemos llamado “ciudadanía LGBT” en el municipio de Pasto' +
@@ -16,7 +15,6 @@ exports.seed = function(knex, Promise) {
                     image: '/images/organización01.jpg',
                 },
                 {
-                    id: 2,
                     name: 'Armario Abierto',
                     description: 'Somos una organización autónoma, no gubernamental, privada y sin ánimo de lucro que nace' +
                         ' en el año 2010 en Manizales, para promover iniciativas que buscan aportar a la construcción de condiciones' +
@@ -31,7 +29,6 @@ exports.seed = function(knex, Promise) {
                     image: '/images/organización02.jpg',
                 },
                 {
-                    id: 3,
                     name: 'Colombia Diversa',
                     description: 'Colombia Diversa nace luego de un diagnóstico sobre la situación de las personas LGBT en Colombia,' +
                         ' en el cual se identificaron varios vacíos conceptuales e imaginarios negativos o erróneos sobre la población' +
