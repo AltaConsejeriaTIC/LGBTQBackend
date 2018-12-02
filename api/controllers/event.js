@@ -108,12 +108,10 @@ function updateEvent(req, res) {
             if (dataAdmin.length === 1) {
                 findEvent(id)
                     .then(event => {
-                        console.log(req.body);
                         if (!event) {
                             res.status(400).send({ message: 'Invalid ID' });
                         } else {
-                            let state = req.body === "true";
-                            eventUpdated(state, id)
+                            eventUpdated(req.body, id)
                                 .then(response => {
                                     res.status(201).send({ id: response.id });
                                 })
@@ -152,7 +150,7 @@ const eventUpdated = (data, id) => Event.query()
 
 const stateUpdated = (data, id) => Event.query()
     .patchAndFetchById(id, {
-        state: data
+        state: data.state
     });
 
 

@@ -191,10 +191,10 @@ paths:
         - in: body 
           name: state
           schema:
-            type: string
+            $ref: "#/definitions/State"
           required: true
       responses:
-        "201":
+        "200":
           description: Success
           schema:
             $ref: "#/definitions/GeneralObjectResponse"
@@ -816,6 +816,13 @@ definitions:
     properties:
       token:
         type: string
+  State:
+    type: object
+    properties:
+      state:
+        type: string
+    required:
+      - state
   Event:
     type: object
     properties:

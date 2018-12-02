@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-10-28',
                     start_time: '2:00 P.M.',
                     finish_time: '5:00 A.M',
-                    state: true,
+                    state: 'true',
                     image: '/images/evento01.jpg',
                     latitude: 4.609549,
                     longitude: -74.070948
@@ -34,7 +34,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-10-13',
                     start_time: '5:30 P.M.',
                     finish_time: '7:30 P.M.',
-                    state: true,
+                    state: 'true',
                     image: '/images/evento02.jpg',
                     latitude: 4.596973,
                     longitude: -74.074396
@@ -49,7 +49,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-10-13',
                     start_time: '9:30 A.M.',
                     finish_time: '11:30 A.M.',
-                    state: true,
+                    state: 'true',
                     image: '/images/evento03.jpg',
                     latitude: 4.623472,
                     longitude: -74.063663
@@ -64,7 +64,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-11-30',
                     start_time: '7:00 P.M.',
                     finish_time: '9:00 P.M.',
-                    state: true,
+                    state: 'true',
                     image: '/images/evento04.jpg',
                     latitude: 4.632349,
                     longitude: -74.075251
@@ -79,7 +79,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-10-07',
                     start_time: '8:00 P.M.',
                     finish_time: '10:00 P.M.',
-                    state: true,
+                    state: 'true',
                     image: '/images/evento05.jpg',
                     latitude: 4.756900,
                     longitude: -74.062581
@@ -93,7 +93,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-11-30',
                     start_time: '2:00 P.M.',
                     finish_time: '5:00 A.M',
-                    state: false,
+                    state: 'false',
                     image: '/images/evento01.jpg',
                     latitude: 4.609549,
                     longitude: -74.070948
@@ -116,7 +116,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-11-21',
                     start_time: '5:30 P.M.',
                     finish_time: '7:30 P.M.',
-                    state: false,
+                    state: 'false',
                     image: '/images/evento02.jpg',
                     latitude: 4.596973,
                     longitude: -74.074396
@@ -131,7 +131,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-11-25',
                     start_time: '9:30 A.M.',
                     finish_time: '11:30 A.M.',
-                    state: false,
+                    state: 'false',
                     image: '/images/evento03.jpg',
                     latitude: 4.623472,
                     longitude: -74.063663
@@ -146,7 +146,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-11-30',
                     start_time: '7:00 P.M.',
                     finish_time: '9:00 P.M.',
-                    state: false,
+                    state: 'false',
                     image: '/images/evento04.jpg',
                     latitude: 4.632349,
                     longitude: -74.075251
@@ -161,7 +161,7 @@ exports.seed = function(knex, Promise) {
                     finish_date: '2018-11-27',
                     start_time: '8:00 P.M.',
                     finish_time: '10:00 P.M.',
-                    state: false,
+                    state: 'false',
                     image: '/images/evento05.jpg',
                     latitude: 4.756900,
                     longitude: -74.062581
