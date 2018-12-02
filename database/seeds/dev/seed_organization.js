@@ -39,6 +39,20 @@ exports.seed = function(knex, Promise) {
                     phone: '(+57) 4831237',
                     state: true,
                     image: '/images/organización03.JPG',
+                },
+                {
+                    name: 'Armario Abierto',
+                    description: 'Somos una organización autónoma, no gubernamental, privada y sin ánimo de lucro que nace' +
+                        ' en el año 2010 en Manizales, para promover iniciativas que buscan aportar a la construcción de condiciones' +
+                        ' de existencia más justas y respaldar la garantía de vidas libres de violencias para las personas que asumen' +
+                        ' identidades de género y/o ejercen sexualidades diversas. Enfocamos nuestras acciones especialmente en las' +
+                        ' mujeres trans que por las condiciones en las que ejercen el trabajo sexual se encuentran en situación de vulnerabilidad.',
+                    website: 'www.wix.com/armarioabierto1/armarioabierto',
+                    address: null,
+                    email: 'armarioabierto.lgbti@gmail.com',
+                    phone: '(+57) 4831237',
+                    state: true,
+                    image: '/images/organización02.jpg',
                 }
             ]);
         });
