@@ -7,12 +7,31 @@ const  AdminHelper = require('../helpers/admin_helper');
 function getNews(req, res) {
     findNews()
         .then((news) => {
+            news.sort(( x, y ) => y.updated_at - x.updated_at);
             res.status(200).send(news);
         })
         .catch((e) => console.error(e));
 }
 
-const findNews = () => News.query();
+const findNews = () => News.query().where( 'date', ">=", getDateOneMonthBefore() );
+
+function getAllNews(req, res) {
+  findAllNews()
+      .then((news) => {
+          news.sort(( x, y ) => y.updated_at - x.updated_at);
+          res.status(200).send(news);
+      })
+      .catch((e) => console.error(e));
+}
+
+const findAllNews = () => News.query()
+
+function getDateOneMonthBefore(){
+  var currentDate = new Date();
+  currentDate.setMonth( currentDate.getMonth() - 1 );
+  return currentDate;
+}
+
 
 function getNewsId(req, res) {
     const id = req.swagger.params.id.value;
@@ -132,5 +151,6 @@ module.exports = {
     getNewsId,
     postNews,
     updateNews,
-    deleteNewsId
+    deleteNewsId,
+    getAllNews
 };

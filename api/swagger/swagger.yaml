@@ -243,6 +243,22 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /allnews:
+    x-swagger-router-controller: news
+    get:
+      description: get all news list
+      operationId: getAllNews
+      tags:
+        - "get news"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/NewsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /news/{id}:
     x-swagger-router-controller: news
     get:
@@ -1102,6 +1118,9 @@ definitions:
       birth_day:
         type: string
         description: User's birth day      
+      education:
+        type: string
+        description: User's education
     required:
       - document_type
       - document_number
@@ -1113,7 +1132,8 @@ definitions:
       - sex_birth
       - sexual_orientation
       - gender
-      - birth_day 
+      - birth_day
+      - education
   UserListResponse:
     required:
       - users
