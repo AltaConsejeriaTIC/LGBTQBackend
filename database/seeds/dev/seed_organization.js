@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
                     address: null,
                     email: 'jotavillota2007@yahoo.com',
                     phone: '+57 (2) 7203733',
-                    state: 'true',
+                    state: 1,
                     image: '/images/organización01.jpg',
                 },
                 {
@@ -25,7 +25,7 @@ exports.seed = function(knex, Promise) {
                     address: null,
                     email: 'armarioabierto.lgbti@gmail.com',
                     phone: '(+57) 4831237',
-                    state: 'true',
+                    state: 1,
                     image: '/images/organización02.jpg',
                 },
                 {
@@ -37,7 +37,7 @@ exports.seed = function(knex, Promise) {
                     address: 'Calle 30A No. 6-22 Oficina 1102, Bogotá D.C',
                     email: 'info@colombiadiversa.org',
                     phone: '(+57) 4831237',
-                    state: 'true',
+                    state: 1,
                     image: '/images/organización03.JPG',
                 },
                 {
@@ -51,7 +51,7 @@ exports.seed = function(knex, Promise) {
                     address: null,
                     email: 'armarioabierto.lgbti@gmail.com',
                     phone: '(+57) 4831237',
-                    state: 'true'',
+                    state: 1,
                     image: '/images/organización02.jpg',
                 }
             ]);

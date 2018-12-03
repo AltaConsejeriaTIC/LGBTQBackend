@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
             table.string('website');
             table.string('phone');
             table.string('email');
-            table.string('state').notNullable();
+            table.integer('state').notNullable();
             table.date('finish_date').notNullable();
             table.string('image').notNullable();
             table.timestamp('created_at').defaultTo(knex.fn.now());
