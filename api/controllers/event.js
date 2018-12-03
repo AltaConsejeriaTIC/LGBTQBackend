@@ -11,28 +11,22 @@ const AdminHelper = require('../helpers/admin_helper');
 function getEvents(req, res) {
     findEvents()
         .then((events) => {
-            events.sort(( x, y ) => y.updated_at - x.updated_at);
             res.status(200).send(events);
         })
         .catch((e) => console.error(e));
 }
 
-const findEvents = () => Event.query().where('finish_date', ">=", getCurrentDate());
+const findEvents = () => Event.query().where('finish_date', ">=", new Date() ).andWhere('state', 'true').orderBy('start_date');
 
 function getAllEvents(req, res) {
     findAllEvents()
         .then((events) => {
-            events.sort(( x, y ) => y.updated_at - x.updated_at);
             res.status(200).send(events);
         })
         .catch((e) => console.error(e));
 }
 
-const findAllEvents = () => Event.query().where('finish_date', ">=", getCurrentDate()).andWhere('state', 'true').orderBy('start_date');
-
-function getCurrentDate() {
-    return new Date();
-}
+const findAllEvents = () => Event.query().where('finish_date', ">=", new Date() ).orderBy('start_date');
 
 function getEvent(req, res) {
     const id = req.swagger.params.id.value;
@@ -143,7 +137,7 @@ const eventUpdated = (data, id) => Event.query()
         state: data.state,
         latitude: data.latitude,
         longitude: data.longitude,
-        updated_at: getCurrentDate()
+        updated_at: new Date()
     });
 
 const stateUpdated = (data, id) => Event.query()
