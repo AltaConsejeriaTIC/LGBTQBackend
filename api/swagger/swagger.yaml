@@ -176,7 +176,7 @@ paths:
       tags:
         - "events"
       description: Update state of the event
-      operationId: updateState
+      operationId: updateStateEvent
       parameters:
         - name: id 
           description: event id 
@@ -192,7 +192,6 @@ paths:
           name: state
           schema:
             $ref: "#/definitions/State"
-          required: true
       responses:
         "200":
           description: Success
@@ -335,6 +334,37 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /updateNewsState/{id}:
+    x-swagger-router-controller: news
+    put:
+      tags:
+        - "news"
+      description: Update state of news
+      operationId: updateStateNews
+      parameters:
+        - name: id 
+          description: news id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: news token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /organizations:
     x-swagger-router-controller: organization
     get:
@@ -427,6 +457,37 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /updateOrganizationState/{id}:
+    x-swagger-router-controller: organization
+    put:
+      tags:
+        - "organizations"
+      description: Update state of organization
+      operationId: updateStateOrganization
+      parameters:
+        - name: id 
+          description: organization id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: organization token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /alliances:
     x-swagger-router-controller: alliance
     get:
@@ -511,6 +572,37 @@ paths:
             $ref: "#/definitions/Organization"
       responses:
         "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateAllianceState/{id}:
+    x-swagger-router-controller: alliance
+    put:
+      tags:
+        - "update Alliance"
+      description: Update state of alliance
+      operationId: updateStateAlliance
+      parameters:
+        - name: id 
+          description: alliance id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: alliance token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
           description: Success
           schema:
             $ref: "#/definitions/GeneralObjectResponse"
@@ -836,9 +928,7 @@ definitions:
     type: object
     properties:
       state:
-        type: string
-    required:
-      - state
+        type: number
   Event:
     type: object
     properties:
@@ -867,7 +957,7 @@ definitions:
         type: string
         description: End time of the event
       state:
-        type: string
+        type: boolean
         description: indicates if the event is 'noted' or no
       image:
         type: string
@@ -922,7 +1012,7 @@ definitions:
         type: string
         description: Source of the news
       state:
-        type: string
+        type: boolean
         description: State of the event (published, not published)
       image_owner:
         type: string
@@ -972,7 +1062,7 @@ definitions:
         type: string
         description: Phone of the organization
       state:
-        type: string
+        type: boolean
         description: indicates if the organization is 'noted' or no
       image:
         type: string

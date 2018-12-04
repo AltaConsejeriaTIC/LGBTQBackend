@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
             table.date('date').notNullable();
             table.string('image_owner');
             table.string('image').notNullable();
-            table.integer('state').notNullable();
+            table.boolean('state').notNullable();
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
         })

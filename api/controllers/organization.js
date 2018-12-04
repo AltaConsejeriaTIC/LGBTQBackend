@@ -92,10 +92,45 @@ const organizationUpdated = (data, id) => Organization.query()
         updated_at: new Date()
     });
 
+function updateStateOrganization(req, res) {
+
+    const id = req.swagger.params.id.value;
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+        .then( (dataAdmin)=>{
+            if( dataAdmin.length === 1 ){
+                findOrganization(id)
+                    .then(organization => {
+                        if (!organization) {
+                            res.status(400).send({ message: 'Invalid ID' });
+                        } else {
+                            stateUpdated(organization.state, id)
+                                .then(response => {
+                                    res.status(200).send({ id: response.id });
+                                })
+                                .catch((e) => console.error(e));
+
+                        }
+                    })
+                    .catch((e) => console.error(e));
+            }else{
+                res.status(403).send({ message: 'Forbidden permissions' });
+            }
+        })
+        .catch(e => console.error(e));
+}
+
+const stateUpdated = (data, id) => Organization.query()
+    .patchAndFetchById(id, {
+        state: !data,
+        updated_at: new Date()
+    });
+
 
 module.exports = {
     getOrganizations,
     getOrganization,
     postOrganization,
-    updateOrganization
+    updateOrganization,
+    updateStateOrganization
 };

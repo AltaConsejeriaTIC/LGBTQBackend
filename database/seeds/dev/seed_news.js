@@ -15,7 +15,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-11-28',
                     image_owner: 'Archivo/El TIEMPO',
                     image: '/images/noticia01.jpg',
-                    state: 1,
+                    state: true,
                 },
                 {
                     title: '\'Huellas Diversas\': Robinson Chaparro y la causa LGBTI en Guaviare',
@@ -31,7 +31,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-11-20',
                     image_owner: 'Publímetro.co',
                     image: '/images/noticia02.jpg',
-                    state: 1,
+                    state: true,
                 },
                 {
                     title: 'Justicia facilitará que los menores trans cambien el nombre del registro.',
@@ -49,7 +49,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-10-17',
                     image_owner: 'VICTOR J BLANCO (GTRES)',
                     image: '/images/noticia03.jpg',
-                    state: 1,
+                    state: true,
                 },
                 {
                     title: '439 personas cambiaron de sexo y nombre en Colombia en 2016',
@@ -64,7 +64,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-11-03',
                     image_owner: 'TRANSGÉNERO',
                     image: '/images/noticia04.jpg',
-                    state: 1,
+                    state: true,
                 },
                 {
                     title: 'Homosexualidad en el mundo: de la pena de muerte al matrimonio',
@@ -80,7 +80,7 @@ exports.seed = function(knex, Promise) {
                     date: '2018-11-06',
                     image_owner: 'MANJUNATH KIRAN (AFP)',
                     image: '/images/noticia05.jpg',
-                    state: 1,
+                    state: true,
                 },
             ]);
         });

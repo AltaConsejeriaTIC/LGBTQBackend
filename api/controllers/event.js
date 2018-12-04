@@ -16,7 +16,7 @@ function getEvents(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findEvents = () => Event.query().where('finish_date', ">=", new Date() ).andWhere('state', 'true').orderBy('start_date');
+const findEvents = () => Event.query().where('finish_date', ">=", new Date() ).andWhere('state', true).orderBy('start_date');
 
 function getAllEvents(req, res) {
     findAllEvents()
@@ -64,7 +64,7 @@ function postEvent(req, res) {
 
 const insert = (event) => Event.query().insert(event);
 
-function updateState(req, res) {
+function updateStateEvent(req, res) {
 
     const id = req.swagger.params.id.value;
     const token = req.headers.token;
@@ -77,7 +77,7 @@ function updateState(req, res) {
                         if (!event) {
                             res.status(400).send({ message: 'Invalid ID' });
                         } else {
-                            stateUpdated(req.body, id)
+                            stateUpdated(event.state, id)
                                 .then(response => {
                                     res.status(200).send({ id: response.id });
                                 })
@@ -109,7 +109,7 @@ function updateEvent(req, res) {
                         } else {
                             eventUpdated(req.body, id)
                                 .then(response => {
-                                    res.status(201).send({ id: response.id });
+                                    res.status(200).send({ id: response.id });
                                 })
                                 .catch((e) => console.error(e));
 
@@ -142,7 +142,8 @@ const eventUpdated = (data, id) => Event.query()
 
 const stateUpdated = (data, id) => Event.query()
     .patchAndFetchById(id, {
-        state: data.state
+        state: !data,
+        updated_at: new Date()
     });
 
 
@@ -152,5 +153,5 @@ module.exports = {
     getEvent,
     postEvent,
     updateEvent,
-    updateState
+    updateStateEvent
 };

@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
             table.string('start_time').notNullable();
             table.string('finish_time').notNullable();
             table.string('image').notNullable();
-            table.integer('state').notNullable();
+            table.boolean('state').notNullable();
             table.float('latitude').notNullable();
             table.float('longitude').notNullable();
             table.timestamp('created_at').defaultTo(knex.fn.now());

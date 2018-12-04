@@ -3,10 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="067ef6b3-ad45-4d27-8e23-8af2c71cf1a0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/alliance.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/alliance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/event.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/event.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/news.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/news.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/organization.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/organization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/swagger/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/api/swagger/swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/20181016143525_create_news_table.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/20181016143525_create_news_table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/20181024142041_organizations_table.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/20181024142041_organizations_table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/20181024143813_alliances_table.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/20181024143813_alliances_table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/dev/seed_alliance.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/dev/seed_alliance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/dev/seed_event.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/dev/seed_event.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/dev/seed_news.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/dev/seed_news.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/dev/seed_organization.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/dev/seed_organization.js" afterDir="false" />
     </list>
@@ -69,37 +76,38 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.31" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="2" />
-          <entry key="js" value="36" />
+          <entry key="js" value="68" />
           <entry key="ts" value="1" />
-          <entry key="yaml" value="2" />
+          <entry key="yaml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="36" />
+          <entry key="JavaScript" value="68" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="TypeScript" value="1" />
-          <entry key="YAML" value="2" />
+          <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="2" />
-          <entry key="js" value="506" />
+          <entry key="js" value="877" />
           <entry key="yaml" value="109" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="506" />
+          <entry key="JavaScript" value="877" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="YAML" value="109" />
         </counts>
@@ -113,19 +121,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/controllers/event.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="100" column="1" lean-forward="true" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/controllers/news.js">
+        <entry file="file://$PROJECT_DIR$/api/controllers/alliance.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1060" />
+            <state relative-caret-position="275">
+              <caret line="111" column="50" selection-start-line="111" selection-start-column="50" selection-end-line="111" selection-end-column="50" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -134,6 +135,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>10010</find>
+      <find>findOrganization</find>
+      <find>1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,17 +155,20 @@
         <option value="$PROJECT_DIR$/database/seeds/dev/admin.js" />
         <option value="$PROJECT_DIR$/database/models/user.js" />
         <option value="$PROJECT_DIR$/api/controllers/login.js" />
-        <option value="$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/api/swagger/swagger.yaml" />
-        <option value="$PROJECT_DIR$/api/controllers/event.js" />
-        <option value="$PROJECT_DIR$/database/seeds/dev/seed_event.js" />
-        <option value="$PROJECT_DIR$/database/seeds/dev/seed_alliance.js" />
-        <option value="$PROJECT_DIR$/database/migrations/20181024143813_alliances_table.js" />
-        <option value="$PROJECT_DIR$/database/migrations/20181016143525_create_news_table.js" />
-        <option value="$PROJECT_DIR$/database/seeds/dev/seed_news.js" />
         <option value="$PROJECT_DIR$/database/migrations/20181024142041_organizations_table.js" />
         <option value="$PROJECT_DIR$/database/seeds/dev/seed_organization.js" />
+        <option value="$PROJECT_DIR$/database/migrations/20181016143525_create_news_table.js" />
+        <option value="$PROJECT_DIR$/database/seeds/dev/seed_news.js" />
+        <option value="$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js" />
+        <option value="$PROJECT_DIR$/database/seeds/dev/seed_event.js" />
+        <option value="$PROJECT_DIR$/database/migrations/20181024143813_alliances_table.js" />
+        <option value="$PROJECT_DIR$/database/seeds/dev/seed_alliance.js" />
+        <option value="$PROJECT_DIR$/api/controllers/event.js" />
+        <option value="$PROJECT_DIR$/api/controllers/news.js" />
+        <option value="$PROJECT_DIR$/api/controllers/organization.js" />
+        <option value="$PROJECT_DIR$/api/controllers/alliance.js" />
       </list>
     </option>
   </component>
@@ -186,10 +192,10 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="42" />
-    <option name="y" value="1069" />
-    <option name="width" value="1879" />
-    <option name="height" value="1092" />
+    <option name="x" value="43" />
+    <option name="y" value="24" />
+    <option name="width" value="1877" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -199,6 +205,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,11 +224,34 @@
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="seeds" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LGBTQBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LGBTQBackend" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="seeds" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -259,11 +289,12 @@
       <workItem from="1537802679616" duration="5115000" />
       <workItem from="1539737583260" duration="95000" />
       <workItem from="1541168012517" duration="2743000" />
+      <workItem from="1543870120150" duration="10358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29661000" />
+    <option name="totallyTimeSpent" value="40019000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -275,7 +306,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="-11" width="1879" height="1092" extended-state="6" />
+    <frame x="43" y="-4" width="1877" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18554477" />
@@ -359,13 +390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/swagger/swagger.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="449" column="13" selection-start-line="449" selection-start-column="13" selection-end-line="449" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/objection/typings/objection/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-439">
@@ -390,13 +414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_event.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="161" column="2" selection-start-line="161" selection-start-column="2" selection-end-line="161" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_complaint.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -410,60 +427,65 @@
     <entry file="file://$PROJECT_DIR$/database/models/alliance.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/20181024143813_alliances_table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_alliance.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/models/news.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_news.js">
+    <entry file="file://$PROJECT_DIR$/api/swagger/swagger.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1205">
-          <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+        <state relative-caret-position="14">
+          <caret line="481" column="13" selection-start-line="481" selection-start-column="13" selection-end-line="481" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/20181024142041_organizations_table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_organization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_event.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="153" column="32" selection-start-line="153" selection-start-column="32" selection-end-line="153" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="44" lean-forward="true" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/20181016143525_create_news_table.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/20181002095941_create_events_table.js">
+    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_news.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="2" lean-forward="true" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
+        <state relative-caret-position="465">
+          <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/20181101131534_create_users_table.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_organization.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/20181024142041_organizations_table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/20181102164059_create_complaints_table.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -471,16 +493,46 @@
     <entry file="file://$PROJECT_DIR$/database/migrations/20181116171333_create_highlights_table.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/event.js">
+    <entry file="file://$PROJECT_DIR$/database/migrations/20181024143813_alliances_table.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="100" column="1" lean-forward="true" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
+        <state relative-caret-position="150">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/organization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="125" column="30" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/controllers/news.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1060" />
+        <state relative-caret-position="170">
+          <caret line="145" column="30" selection-start-line="145" selection-start-column="30" selection-end-line="145" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/event.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="145" column="30" selection-start-line="145" selection-start-column="30" selection-end-line="145" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/dev/seed_alliance.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/alliance.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="111" column="50" selection-start-line="111" selection-start-column="50" selection-end-line="111" selection-end-column="50" />
+        </state>
       </provider>
     </entry>
   </component>
