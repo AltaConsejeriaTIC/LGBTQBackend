@@ -90,7 +90,7 @@ function postComplaint(req, res) {
               to: 'diversidadsexual@sdp.gov.co',
               subject: 'Nodemailer test',
               text: '',
-              html: getHtmlDesign(data, new Date(), response.id ),
+              html: getHtmlDesign(data, getCurrentDate(), response.id ),
               attachments: [{
                 filename: 'organización03',
                 path: `./public/images/organización03.JPG`,
@@ -270,7 +270,7 @@ function getHtmlDesign( data, date , id ){
                   <h1 class="title-complaint mb-0 complaint-title-size ml-set to-uppercase"> ${data.first_name} ${data.last_name}</h1>
               </div>
               
-              <p class="mt-0 color-gray">Fecha de envío: ${date.getFullYear()}-${date.getMonth()}-${date.getDay()} </p>
+              <p class="mt-0 color-gray">Fecha de envío: ${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate() }</p>
 
               <p class="mb-0"><b>Nombres y apellidos:</b> ${data.first_name} ${data.last_name}</p>
               <p class="mb-0 mt-0"><b>Tipo de documento de identidad:</b> ${data.document_type}</p>
