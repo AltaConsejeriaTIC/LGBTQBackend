@@ -109,7 +109,7 @@ function updateEvent(req, res) {
                         } else {
                             eventUpdated(req.body, id)
                                 .then(response => {
-                                    res.status(200).send({ id: response.id });
+                                    res.status(201).send({ id: response.id });
                                 })
                                 .catch((e) => console.error(e));
 

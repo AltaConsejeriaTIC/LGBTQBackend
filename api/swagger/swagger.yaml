@@ -978,8 +978,6 @@ definitions:
       - finish_time
       - state
       - image
-      - latitude
-      - longitude
   GeneralObjectResponse:
     type: object
     properties:
