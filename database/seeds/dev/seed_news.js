@@ -2,7 +2,6 @@ exports.seed = function(knex, Promise) {
     return knex('news').del()
         .then(function() {
             return knex('news').insert([{
-                    id: 1,
                     title: 'Pareja de lesbianas denunció discriminación de género en TransMilenio',
                     description: 'Una joven pareja de mujeres lesbianas denunció a través de las redes sociales que fue víctima de discriminación de género,' +
                         ' en un incidente que se presentó el pasado 23 de agosto mientras viajaban en la ruta G47 con trayecto final al Portal del Sur.' +
@@ -13,13 +12,12 @@ exports.seed = function(knex, Promise) {
                         ' justamente diagonal al conductor del vehículo.',
                     source: 'eltiempo.com',
                     source_link: 'https://www.eltiempo.com/justicia/delitos/pareja-de-lesbianas-denuncio-discriminacion-de-genero-en-transmilenio-261806',
-                    date: '2018-10-28',
+                    date: '2018-11-28',
                     image_owner: 'Archivo/El TIEMPO',
                     image: '/images/noticia01.jpg',
                     state: true,
                 },
                 {
-                    id: 2,
                     title: '\'Huellas Diversas\': Robinson Chaparro y la causa LGBTI en Guaviare',
                     description: 'Cientos de miembros y simpatizantes del colectivo LGTB en la India salieron este sábado a las calles de la ciudad india de Bombay' +
                         ' para reclamar que el Tribunal Supremo tumbe el artículo 377 del Código Penal indio, que criminaliza las relaciones homosexuales.' +
@@ -30,13 +28,12 @@ exports.seed = function(knex, Promise) {
                         ' remarcó que "hasta que los actos homosexuales sean despenalizados" no será posible solicitar más derechos, como los de igualdad, matrimonio o adopción.',
                     source: 'eltiempo.com',
                     source_link: 'https://canaltrece.com.co/noticias/la-lucha-lgbti-que-lidera-robinson-chaparro-en-guaviare/',
-                    date: '2018-02-03',
+                    date: '2018-11-20',
                     image_owner: 'Publímetro.co',
                     image: '/images/noticia02.jpg',
                     state: true,
                 },
                 {
-                    id: 3,
                     title: 'Justicia facilitará que los menores trans cambien el nombre del registro.',
                     description: 'Los menores trans tendrán más fácil cambiar el nombre que figura en el Registro Civil.' +
                         ' Tras una reunión que han mantenido esta mañana la ministra de Justicia, Dolores Delgado, el director general de Registros y Notariado,' +
@@ -55,7 +52,6 @@ exports.seed = function(knex, Promise) {
                     state: true,
                 },
                 {
-                    id: 4,
                     title: '439 personas cambiaron de sexo y nombre en Colombia en 2016',
                     description: 'La oficina de planeación de la Superintendencia de Notariado y Registro (SNR), dio a conocer que entre enero de 2016 ' +
                         ' y el mismo mes de 2017 un total de 439 personas acudieron a las diferentes notarías del país para cambiar su nombre por uno del sexo opuesto.' +
@@ -65,13 +61,12 @@ exports.seed = function(knex, Promise) {
                         ' Yesid Reyes y el actual ministro del interior Juan Fernando Cristo.',
                     source: 'eltiempo.com',
                     source_link: 'https://www.dinero.com/pais/articulo/cuantas-personas-cambiaron-de-sexo-en-colombia-en-2016/242740',
-                    date: '2018-08-03',
+                    date: '2018-11-03',
                     image_owner: 'TRANSGÉNERO',
                     image: '/images/noticia04.jpg',
                     state: true,
                 },
                 {
-                    id: 5,
                     title: 'Homosexualidad en el mundo: de la pena de muerte al matrimonio',
                     description: 'La homosexualidad, que la Corte Suprema de la India acaba de despenalizar, sigue siendo reprimida o incluso castigada con la pena de muerte en muchos países.' +
                         ' En otros, en cambio, se reconoce plenamente y se permite el matrimonio entre personas del mismo sexo.\n' +
@@ -82,7 +77,7 @@ exports.seed = function(knex, Promise) {
                         ' Mozambique o la República Democrática del Congo) la han despenalizado.',
                     source: 'elperiodico.com',
                     source_link: 'https://www.elperiodico.com/es/internacional/20180906/homosexualidad-en-el-mundo-7021092',
-                    date: '2018-09-06',
+                    date: '2018-11-06',
                     image_owner: 'MANJUNATH KIRAN (AFP)',
                     image: '/images/noticia05.jpg',
                     state: true,

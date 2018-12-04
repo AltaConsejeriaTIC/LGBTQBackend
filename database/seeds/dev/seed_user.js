@@ -4,7 +4,6 @@ exports.seed = function(knex, Promise) {
         .then(function() {
             // Inserts seed entries
             return knex('users').insert([{
-                    id: 1,
                     document_type: 'Cédula de ciudadania',
                     document_number: '100879457',
                     first_name: 'José',
@@ -19,7 +18,6 @@ exports.seed = function(knex, Promise) {
                     education: 'Ninguno'
                 },
                 {
-                    id: 2,
                     document_type: 'Cédula de ciudadania',
                     document_number: '100879458',
                     first_name: 'Pedro',
@@ -34,7 +32,6 @@ exports.seed = function(knex, Promise) {
                     education: 'Básica primaria'
                 },
                 {
-                    id: 3,
                     document_type: 'Cédula de ciudadania',
                     document_number: '100879459',
                     first_name: 'Diana',
