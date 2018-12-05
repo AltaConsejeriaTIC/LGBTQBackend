@@ -174,7 +174,7 @@ paths:
     x-swagger-router-controller: event
     put:
       tags:
-        - "events"
+        - "update Event"
       description: Update state of the event
       operationId: updateStateEvent
       parameters:
@@ -338,7 +338,7 @@ paths:
     x-swagger-router-controller: news
     put:
       tags:
-        - "news"
+        - "update News"
       description: Update state of news
       operationId: updateStateNews
       parameters:
@@ -928,7 +928,7 @@ definitions:
     type: object
     properties:
       state:
-        type: number
+        type: boolean
   Event:
     type: object
     properties:
@@ -1099,7 +1099,7 @@ definitions:
         type: string
         description: Phone of the alliance
       state:
-        type: string
+        type: boolean
         description: indicates if the alliance is 'noted' or no
       finish_date:
         type: string
