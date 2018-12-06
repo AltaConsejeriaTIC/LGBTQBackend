@@ -13,7 +13,7 @@ function getNews(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findNews = () => News.query().where( 'date', ">=", getDateOneMonthBefore() );
+const findNews = () => News.query().where( 'date', ">=", getDateOneMonthBefore() ).andWhere('state', true).orderBy('date');
 
 function getAllNews(req, res) {
   findAllNews()
@@ -24,7 +24,7 @@ function getAllNews(req, res) {
       .catch((e) => console.error(e));
 }
 
-const findAllNews = () => News.query()
+const findAllNews = () => News.query().where( 'date', ">=", getDateOneMonthBefore() ).orderBy('date')
 
 function getDateOneMonthBefore(){
   var currentDate = new Date();
