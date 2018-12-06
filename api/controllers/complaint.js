@@ -12,6 +12,10 @@ const Joi = require('joi');
 const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2');
 var smtpTransport = require('nodemailer-smtp-transport');
+const mailClient = process.env.MAIL_CLIENT;
+const clientID = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const refreshToken = process.env.REFRESH_TOKEN;
 
 const schema = Joi.object().keys({
 
@@ -34,10 +38,10 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     type: 'OAuth2',
-    user: 'diversidadsexual@sdp.gov.co',
-    clientId: '788019342140-ts5tlhr23etdn902imrlgvq8ad2185b0.apps.googleusercontent.com',
-    clientSecret: 'PiSpgLkk3cRyCYOpJ8gLG3SX',
-    refreshToken: '1/u-ALWdCIyOST2tHJ_-uc9xXZCq7sJWeQ_07Po-RnD9k'
+    user: `${mailClient}`,
+    clientId: `${clientID}`,
+    clientSecret: `${clientSecret}`,
+    refreshToken: `${refreshToken}`
   }
  })
 
@@ -87,8 +91,8 @@ function postComplaint(req, res) {
           .then(response => {
             
             const mailOptions = {
-              from: 'Diversidad Sexual <diversidadsexual@sdp.gov.co>',
-              to: 'diversidadsexual@sdp.gov.co',
+              from: `Diversidad Sexual <${mailClient}>`,
+              to: `${mailClient}`,
               subject: `APP Denuncia de: ${data.first_name} ${data.last_name}`,
               text: '',
               html: UtilityHelper.getHtmlDesign( data, getCurrentDate(), response.id  ),
