@@ -7,7 +7,11 @@ const { Complaint } = require('../../database/models/complaint');
 const knex = require('knex');
 var util = require('util');
 const  AdminHelper = require('../helpers/admin_helper');
+const UtilityHelper = require('../helpers/utility_helpe ');
 const Joi = require('joi');
+const nodemailer = require('nodemailer');
+const xoauth2 = require('xoauth2');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 const schema = Joi.object().keys({
 
@@ -22,6 +26,20 @@ const schema = Joi.object().keys({
   description: Joi.string().required()
 
 });
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    type: 'OAuth2',
+    user: 'diversidadsexual@sdp.gov.co',
+    clientId: '788019342140-ts5tlhr23etdn902imrlgvq8ad2185b0.apps.googleusercontent.com',
+    clientSecret: 'PiSpgLkk3cRyCYOpJ8gLG3SX',
+    refreshToken: '1/u-ALWdCIyOST2tHJ_-uc9xXZCq7sJWeQ_07Po-RnD9k'
+  }
+ })
 
 function getComplaints(req, res) {
     findComplaints()
@@ -57,16 +75,40 @@ function postComplaint(req, res) {
     const data = req.body;
     Joi.validate(data, schema, (err, value) => {
 
-      if (err) {
-        res.status(422).json({
-            status: 'error',
-            message: 'Invalid request data',
-            error: err
-        });
-    } else {
+        if (err) {
+          res.status(422).json({
+              status: 'error',
+              message: 'Invalid request data',
+              error: err
+          });
+        } else {
+  
         insert(data)
           .then(response => {
-              res.status(201).send({ id: response.id });
+            
+            const mailOptions = {
+              from: 'Diversidad Sexual <diversidadsexual@sdp.gov.co>',
+              to: 'diversidadsexual@sdp.gov.co',
+              subject: `APP Denuncia de: ${data.first_name} ${data.last_name}`,
+              text: '',
+              html: UtilityHelper.getHtmlDesign( data, getCurrentDate(), response.id  ),
+              attachments: [{
+                filename: 'sign-dds',
+                path: `./public/images/sign-dds.png`,
+                cid: 'unique@kreata.ee'
+            }]
+            }
+
+            transporter.sendMail(mailOptions, function (err, res) { 
+              if(err){
+                  console.log('Error sending email');
+                  console.log(err)
+              } else {
+                  console.log('Email Sent');
+              }
+            })
+            
+            res.status(201).send({ id: response.id });
           })
           .catch(e => console.error(e));
     }
