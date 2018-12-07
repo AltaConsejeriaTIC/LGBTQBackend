@@ -1,8 +1,21 @@
 'use strict';
 
 const { Alliance } = require('../../database/models/alliance');
-const  AdminHelper = require('../helpers/admin_helper');
+const AdminHelper = require('../helpers/admin_helper');
+const Joi = require('joi');
 
+const schema = Joi.object().keys({
+
+    name: Joi.string().required(),
+    description: Joi.string().min(150).max(220).required(),
+    offer: Joi.string().min(300).max(700).required(),
+    website: Joi.string(),
+    phone: Joi.string().regex(/^[0-9]*$/),
+    email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
+    state: Joi.boolean().default(true),
+    finish_date: Joi.date().required(),
+
+});
 
 function getAlliances(req, res) {
     findAlliances()
@@ -31,23 +44,33 @@ function getAlliance(req, res) {
 const findAlliance = (id) => Alliance.query().where('id', id).first();
 
 function postAlliance(req, res) {
-
     const token = req.headers.token;
-    AdminHelper.isAuthenticate(token)
-    .then( (dataAdmin)=>{
-      if( dataAdmin.length === 1 ){
-        insert(req.body)
-        .then(response => {
-            res.status(201).send({ id: response.id });
-        })
-        .catch(e => console.error(e));
-      }else{
-        res.status(403).send({ message: 'Forbidden permissions' });
-      }
-    })
-    .catch(e => console.error(e));
+    const data = req.body;
+    Joi.validate(data, schema, (err, value) => {
 
-    
+        if (err) {
+            res.status(422).json({
+                status: 'error',
+                message: 'Invalid request data',
+                error: err
+            });
+        } else {
+            AdminHelper.isAuthenticate(token)
+                .then((dataAdmin) => {
+                    if (dataAdmin.length === 1) {
+                        insert(req.body)
+                            .then(response => {
+                                res.status(201).send({ id: response.id });
+                            })
+                            .catch(e => console.error(e));
+                    } else {
+                        res.status(403).send({ message: 'Forbidden permissions' });
+                    }
+                })
+                .catch(e => console.error(e));
+        }
+
+    });
 }
 
 const insert = (alliance) => Alliance.query().insert(alliance);
@@ -58,27 +81,27 @@ function updateAlliance(req, res) {
 
     const token = req.headers.token;
     AdminHelper.isAuthenticate(token)
-    .then( (dataAdmin)=>{
-      if( dataAdmin.length === 1 ){
-        findAlliance(id)
-        .then(alliance => {
-            if (!alliance) {
-                res.status(400).send({ message: 'Invalid ID' });
-            } else {
-                allianceUpdated(req.body, id)
-                    .then(response => {
-                        res.status(201).send({ id: response.id });
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
+                findAlliance(id)
+                    .then(alliance => {
+                        if (!alliance) {
+                            res.status(400).send({ message: 'Invalid ID' });
+                        } else {
+                            allianceUpdated(req.body, id)
+                                .then(response => {
+                                    res.status(201).send({ id: response.id });
+                                })
+                                .catch((e) => console.error(e));
+
+                        }
                     })
                     .catch((e) => console.error(e));
-
+            } else {
+                res.status(403).send({ message: 'Forbidden permissions' });
             }
         })
-        .catch((e) => console.error(e));
-      }else{
-        res.status(403).send({ message: 'Forbidden permissions' });
-      }
-    })
-    .catch(e => console.error(e));    
+        .catch(e => console.error(e));
 }
 
 const allianceUpdated = (data, id) => Alliance.query()
@@ -100,14 +123,14 @@ function updateStateAlliance(req, res) {
     const id = req.swagger.params.id.value;
     const token = req.headers.token;
     AdminHelper.isAuthenticate(token)
-        .then( (dataAdmin)=>{
-            if( dataAdmin.length === 1 ){
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
                 findAlliance(id)
                     .then(alliance => {
                         if (!alliance) {
                             res.status(400).send({ message: 'Invalid ID' });
                         } else {
-                            stateUpdated(alliance.state , id)
+                            stateUpdated(alliance.state, id)
                                 .then(response => {
                                     res.status(200).send({ id: response.id });
                                 })
@@ -116,7 +139,7 @@ function updateStateAlliance(req, res) {
                         }
                     })
                     .catch((e) => console.error(e));
-            }else{
+            } else {
                 res.status(403).send({ message: 'Forbidden permissions' });
             }
         })
