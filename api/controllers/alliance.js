@@ -14,6 +14,7 @@ const schema = Joi.object().keys({
     email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
     state: Joi.boolean().default(true),
     finish_date: Joi.date().required(),
+    image: Joi.string().required(),
 
 });
 
@@ -78,30 +79,41 @@ const insert = (alliance) => Alliance.query().insert(alliance);
 function updateAlliance(req, res) {
 
     const id = req.swagger.params.id.value;
-
+    const data = req.body;
     const token = req.headers.token;
-    AdminHelper.isAuthenticate(token)
-        .then((dataAdmin) => {
-            if (dataAdmin.length === 1) {
-                findAlliance(id)
-                    .then(alliance => {
-                        if (!alliance) {
-                            res.status(400).send({ message: 'Invalid ID' });
-                        } else {
-                            allianceUpdated(req.body, id)
-                                .then(response => {
-                                    res.status(201).send({ id: response.id });
-                                })
-                                .catch((e) => console.error(e));
+    Joi.validate(data, schema, (err, value) => {
 
-                        }
-                    })
-                    .catch((e) => console.error(e));
-            } else {
-                res.status(403).send({ message: 'Forbidden permissions' });
-            }
-        })
-        .catch(e => console.error(e));
+        if (err) {
+            res.status(422).json({
+                status: 'error',
+                message: 'Invalid request data',
+                error: err
+            });
+        } else {
+            AdminHelper.isAuthenticate(token)
+                .then((dataAdmin) => {
+                    if (dataAdmin.length === 1) {
+                        findAlliance(id)
+                            .then(alliance => {
+                                if (!alliance) {
+                                    res.status(400).send({ message: 'Invalid ID' });
+                                } else {
+                                    allianceUpdated(req.body, id)
+                                        .then(response => {
+                                            res.status(201).send({ id: response.id });
+                                        })
+                                        .catch((e) => console.error(e));
+
+                                }
+                            })
+                            .catch((e) => console.error(e));
+                    } else {
+                        res.status(403).send({ message: 'Forbidden permissions' });
+                    }
+                })
+                .catch(e => console.error(e));
+        }
+    });
 }
 
 const allianceUpdated = (data, id) => Alliance.query()
