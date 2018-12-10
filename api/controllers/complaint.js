@@ -6,12 +6,8 @@ const database = require('knex')(configuration);
 const { Complaint } = require('../../database/models/complaint');
 const knex = require('knex');
 var util = require('util');
-<<<<<<< HEAD
 const  AdminHelper = require('../helpers/admin_helper');
 const UtilityHelper = require('../helpers/utility_helpe ');
-=======
-const AdminHelper = require('../helpers/admin_helper');
->>>>>>> feature/highligt
 const Joi = require('joi');
 const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2');
