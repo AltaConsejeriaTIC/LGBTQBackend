@@ -569,7 +569,7 @@ paths:
           name: alliance
           description: The alliance to update.
           schema:
-            $ref: "#/definitions/Organization"
+            $ref: "#/definitions/Alliance"
       responses:
         "201":
           description: Success
@@ -1095,6 +1095,9 @@ definitions:
       website:
         type: string
         description: Website of the alliance
+      email:
+        type: string
+        description: Email of the alliance
       phone:
         type: string
         description: Phone of the alliance
@@ -1112,6 +1115,7 @@ definitions:
       - description
       - offer
       - finish_date
+      - email
       - state
       - image
   AlliancesListResponse:
