@@ -13,7 +13,7 @@ const schema = Joi.object().keys({
     id: Joi.number(),
     title: Joi.string().max(50).required(),
     description: Joi.string().min(150).max(800).required(),
-    place: Joi.string(),
+    place: Joi.string().allow(''),
     address: Joi.string().required(),
     start_date: Joi.date().required(),
     finish_date: Joi.date().required(),
