@@ -10,8 +10,8 @@ const AdminHelper = require('../helpers/admin_helper');
 const Joi = require('joi');
 
 const schema = Joi.object().keys({
-
-    title: Joi.string().max(45).required(),
+    id: Joi.number(),
+    title: Joi.string().max(50).required(),
     description: Joi.string().min(150).max(800).required(),
     place: Joi.string(),
     address: Joi.string().required(),
@@ -21,12 +21,13 @@ const schema = Joi.object().keys({
     finish_time: Joi.string().required(),
     image: Joi.string().required(),
     state: Joi.boolean().default(true),
-    latitude: Joi.number().required(),
-    longitude: Joi.number().required(),
-
-
-});
-
+    latitude: Joi.number(),
+    longitude: Joi.number(),
+    created_at: Joi.date(),
+    updated_at: Joi.date()
+  });
+  
+  
 function getEvents(req, res) {
     findEvents()
         .then((events) => {

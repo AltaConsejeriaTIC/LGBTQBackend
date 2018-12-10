@@ -5,7 +5,7 @@ const  AdminHelper = require('../helpers/admin_helper');
 const Joi = require('joi');
 
 const schema = Joi.object().keys({
-
+    id: Joi.number(),
     title: Joi.string().max(82).required(),
     description: Joi.string().max(1000).required(),
     source: Joi.string(),
@@ -13,9 +13,9 @@ const schema = Joi.object().keys({
     date: Joi.date().required(),
     image_owner: Joi.string(),
     image: Joi.string().required(),
-    state: Joi.boolean().default(true)
-
-
+    state: Joi.boolean().default(true),
+    created_at: Joi.date(),
+    updated_at: Joi.date()
 });
 
 
