@@ -5,30 +5,17 @@ const AdminHelper = require('../helpers/admin_helper');
 const Joi = require('joi');
 
 const schema = Joi.object().keys({
-<<<<<<< 2cf1687366a7d8a3ef7a19e1c4db0120e8304401
-  id: Joi.number(),
-  name: Joi.string().max(45).required(),
-  description: Joi.string().min(200).max(700).required(),
-  website: Joi.string().allow(''),
-  address: Joi.string().allow(''),
-  email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
-  phone: Joi.string().regex(/^([\(]?\+[0-9]{1,3}[\)]?)?[0-9\s]{7,20}$/),
-  state: Joi.boolean().default(true),
-  image: Joi.string().required(),
-  created_at: Joi.date(),
-  updated_at: Joi.date()
-=======
-
-    name: Joi.string().required(),
-    description: Joi.string().min(150).max(220).required(),
-    website: Joi.string(),
-    address: Joi.string(),
+    id: Joi.number(),
+    name: Joi.string().max(45).required(),
+    description: Joi.string().min(200).max(700).required(),
+    website: Joi.string().allow(''),
+    address: Joi.string().allow(''),
     email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
-    phone: Joi.string().regex(/^[0-9]*$/),
+    phone: Joi.string().regex(/^([\(]?\+[0-9]{1,3}[\)]?)?[0-9\s]{7,20}$/),
     state: Joi.boolean().default(true),
-    image: Joi.string().required()
-
->>>>>>> Get alliances an organization whit state true
+    image: Joi.string().required(),
+    created_at: Joi.date(),
+    updated_at: Joi.date()
 });
 
 function getAllOrganizations(req, res) {
