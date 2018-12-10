@@ -45,11 +45,27 @@ function postHighlight(req, res) {
                 .then((highlights) => {
                     console.log('TAMAÑO===', highlights.length);
                     if (dataAdmin.length === 1 && highlights.length < 3) {
-                        insert(req.body)
+
+                        var checkIfExists = false , data = req.body;
+
+                        for( let high of highlights ){
+                          if( (high.section_id === data.section_id) && (high.section === data.section) ){
+                            checkIfExists = true;
+                          }
+                        }
+
+                        if( !checkIfExists ){
+                          insert(req.body)
                             .then(response => {
                                 res.status(201).send({ id: response.id });
                             })
                             .catch(e => console.error(e));
+                        }
+                        else{
+                          res.status(422).send({ message: `highlight ${data.section_id} of ${data.section} already exists` });
+                        }
+
+                        
 
                     } else if (highlights.length >= 3) {
                         res.status(422).send({ message: 'Full Highlights capacity, only three allow' });
