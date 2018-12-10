@@ -19,6 +19,16 @@ const schema = Joi.object().keys({
     updated_at: Joi.date()
 });
 
+function getAllAlliances(req, res) {
+    findAllAlliances()
+        .then((news) => {
+            res.status(200).send(news);
+        })
+        .catch((e) => console.error(e));
+}
+
+const findAllAlliances = () => Alliance.query();
+
 function getAlliances(req, res) {
     findAlliances()
         .then((news) => {
@@ -27,7 +37,7 @@ function getAlliances(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAlliances = () => Alliance.query();
+const findAlliances = () => Alliance.query().where('state', true);
 
 function getAlliance(req, res) {
     const id = req.swagger.params.id.value;
@@ -168,8 +178,9 @@ const stateUpdated = (data, id) => Alliance.query()
 
 module.exports = {
     getAlliances,
+    getAllAlliances,
     getAlliance,
     postAlliance,
     updateAlliance,
-    updateStateAlliance
+    updateStateAlliance,
 };

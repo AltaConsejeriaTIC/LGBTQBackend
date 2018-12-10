@@ -1,10 +1,11 @@
 'use strict';
 
 const { Organization } = require('../../database/models/organization');
-const  AdminHelper = require('../helpers/admin_helper');
+const AdminHelper = require('../helpers/admin_helper');
 const Joi = require('joi');
 
 const schema = Joi.object().keys({
+<<<<<<< 2cf1687366a7d8a3ef7a19e1c4db0120e8304401
   id: Joi.number(),
   name: Joi.string().max(45).required(),
   description: Joi.string().min(200).max(700).required(),
@@ -16,7 +17,29 @@ const schema = Joi.object().keys({
   image: Joi.string().required(),
   created_at: Joi.date(),
   updated_at: Joi.date()
+=======
+
+    name: Joi.string().required(),
+    description: Joi.string().min(150).max(220).required(),
+    website: Joi.string(),
+    address: Joi.string(),
+    email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
+    phone: Joi.string().regex(/^[0-9]*$/),
+    state: Joi.boolean().default(true),
+    image: Joi.string().required()
+
+>>>>>>> Get alliances an organization whit state true
 });
+
+function getAllOrganizations(req, res) {
+    findAllOrganizations()
+        .then((news) => {
+            res.status(200).send(news);
+        })
+        .catch((e) => console.error(e));
+}
+
+const findAllOrganizations = () => Organization.query();
 
 function getOrganizations(req, res) {
     findOrganizations()
@@ -26,7 +49,7 @@ function getOrganizations(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findOrganizations = () => Organization.query();
+const findOrganizations = () => Organization.query().where('state', true);
 
 function getOrganization(req, res) {
     const id = req.swagger.params.id.value;
@@ -46,76 +69,76 @@ const findOrganization = (id) => Organization.query().where('id', id).first();
 
 function postOrganization(req, res) {
 
-  const token = req.headers.token;
-  const data = req.body;
-  Joi.validate(data, schema, (err, value) => {
+    const token = req.headers.token;
+    const data = req.body;
+    Joi.validate(data, schema, (err, value) => {
 
-      if (err) {
-          res.status(422).json({
-              status: 'error',
-              message: 'Invalid request data',
-              error: err
-          });
-      } else {
-          AdminHelper.isAuthenticate(token)
-              .then((dataAdmin) => {
-                  if (dataAdmin.length === 1) {
-                      insert(req.body)
-                          .then(response => {
-                              res.status(201).send({ id: response.id });
-                          })
-                          .catch(e => console.error(e));
-                  } else {
-                      res.status(403).send({ message: 'Forbidden permissions' });
-                  }
-              })
-              .catch(e => console.error(e));
-      }
+        if (err) {
+            res.status(422).json({
+                status: 'error',
+                message: 'Invalid request data',
+                error: err
+            });
+        } else {
+            AdminHelper.isAuthenticate(token)
+                .then((dataAdmin) => {
+                    if (dataAdmin.length === 1) {
+                        insert(req.body)
+                            .then(response => {
+                                res.status(201).send({ id: response.id });
+                            })
+                            .catch(e => console.error(e));
+                    } else {
+                        res.status(403).send({ message: 'Forbidden permissions' });
+                    }
+                })
+                .catch(e => console.error(e));
+        }
 
-  });
-    
+    });
+
 }
 
 const insert = (organization) => Organization.query().insert(organization);
 
 function updateOrganization(req, res) {
 
-  const id = req.swagger.params.id.value;
-  const data = req.body;
-  const token = req.headers.token;
-  Joi.validate(data, schema, (err, value) => {
+    const id = req.swagger.params.id.value;
+    const data = req.body;
+    const token = req.headers.token;
+    Joi.validate(data, schema, (err, value) => {
 
-      if (err) {
-          res.status(422).json({
-              status: 'error',
-              message: 'Invalid request data',
-              error: err
-          });
-      } else {
-          AdminHelper.isAuthenticate(token)
-              .then((dataAdmin) => {
-                  if (dataAdmin.length === 1) {
-                      findOrganization(id)
-                          .then(organization => {
-                              if (!organization) {
-                                  res.status(400).send({ message: 'Invalid ID' });
-                              } else {
-                                  organizationUpdated(req.body, id)
-                                      .then(response => {
-                                          res.status(201).send({ id: response.id });
-                                      })
-                                      .catch((e) => console.error(e));
+        if (err) {
+            res.status(422).json({
+                status: 'error',
+                message: 'Invalid request data',
+                error: err
+            });
+        } else {
+            AdminHelper.isAuthenticate(token)
+                .then((dataAdmin) => {
+                    if (dataAdmin.length === 1) {
+                        findOrganization(id)
+                            .then(organization => {
+                                if (!organization) {
+                                    res.status(400).send({ message: 'Invalid ID' });
+                                } else {
+                                    organizationUpdated(req.body, id)
+                                        .then(response => {
+                                            res.status(201).send({ id: response.id });
+                                        })
+                                        .catch((e) => console.error(e));
 
-                              }
-                          })
-                          .catch((e) => console.error(e));
-                  } else {
-                      res.status(403).send({ message: 'Forbidden permissions' });
-                  }
-              })
-              .catch(e => console.error(e));
-      }
-  });
+                                }
+                            })
+                            .catch((e) => console.error(e));
+                    } else {
+                        res.status(403).send({ message: 'Forbidden permissions' });
+                    }
+                })
+                .catch(e => console.error(e));
+        }
+    });
 }
 
 const organizationUpdated = (data, id) => Organization.query()
@@ -136,8 +159,8 @@ function updateStateOrganization(req, res) {
     const id = req.swagger.params.id.value;
     const token = req.headers.token;
     AdminHelper.isAuthenticate(token)
-        .then( (dataAdmin)=>{
-            if( dataAdmin.length === 1 ){
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
                 findOrganization(id)
                     .then(organization => {
                         if (!organization) {
@@ -152,7 +175,7 @@ function updateStateOrganization(req, res) {
                         }
                     })
                     .catch((e) => console.error(e));
-            }else{
+            } else {
                 res.status(403).send({ message: 'Forbidden permissions' });
             }
         })
@@ -168,6 +191,7 @@ const stateUpdated = (data, id) => Organization.query()
 
 module.exports = {
     getOrganizations,
+    getAllOrganizations,
     getOrganization,
     postOrganization,
     updateOrganization,
