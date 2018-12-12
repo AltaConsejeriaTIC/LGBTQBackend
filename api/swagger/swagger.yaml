@@ -365,6 +365,22 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /allOrganizations:
+    x-swagger-router-controller: organization
+    get:
+      description: get the organizations list
+      operationId: getAllOrganizations
+      tags:
+        - "organizations"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/OrganizationsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /organizations:
     x-swagger-router-controller: organization
     get:
@@ -484,6 +500,22 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /allAlliances:
+    x-swagger-router-controller: alliance
+    get:
+      description: get the alliances list
+      operationId: getAllAlliances
+      tags:
+        - "get alliances"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AlliancesListResponse"
         default:
           description: Error
           schema:
