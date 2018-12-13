@@ -2,7 +2,6 @@ exports.seed = function(knex, Promise) {
     return knex('organizations').del()
         .then(function() {
             return knex('organizations').insert([{
-                    id: 1,
                     name: 'Ágora Club',
                     description: 'ÁGORA Club, es el nombre adoptado por un grupo de personas interesadas en el trabajo' +
                         ' en pro de la construcción de lo que hemos llamado “ciudadanía LGBT” en el municipio de Pasto' +
@@ -13,10 +12,9 @@ exports.seed = function(knex, Promise) {
                     email: 'jotavillota2007@yahoo.com',
                     phone: '+57 (2) 7203733',
                     state: true,
-                    image: '/images/organizacion01.jpg',
+                    image: '/images/organización01.jpg',
                 },
                 {
-                    id: 2,
                     name: 'Armario Abierto',
                     description: 'Somos una organización autónoma, no gubernamental, privada y sin ánimo de lucro que nace' +
                         ' en el año 2010 en Manizales, para promover iniciativas que buscan aportar a la construcción de condiciones' +
@@ -28,10 +26,9 @@ exports.seed = function(knex, Promise) {
                     email: 'armarioabierto.lgbti@gmail.com',
                     phone: '(+57) 4831237',
                     state: true,
-                    image: '/images/organizacion02.jpg',
+                    image: '/images/organización02.jpg',
                 },
                 {
-                    id: 3,
                     name: 'Colombia Diversa',
                     description: 'Colombia Diversa nace luego de un diagnóstico sobre la situación de las personas LGBT en Colombia,' +
                         ' en el cual se identificaron varios vacíos conceptuales e imaginarios negativos o erróneos sobre la población' +
@@ -41,7 +38,21 @@ exports.seed = function(knex, Promise) {
                     email: 'info@colombiadiversa.org',
                     phone: '(+57) 4831237',
                     state: true,
-                    image: '/images/organizacion03.jpg',
+                    image: '/images/organización03.JPG',
+                },
+                {
+                    name: 'Armario Abierto',
+                    description: 'Somos una organización autónoma, no gubernamental, privada y sin ánimo de lucro que nace' +
+                        ' en el año 2010 en Manizales, para promover iniciativas que buscan aportar a la construcción de condiciones' +
+                        ' de existencia más justas y respaldar la garantía de vidas libres de violencias para las personas que asumen' +
+                        ' identidades de género y/o ejercen sexualidades diversas. Enfocamos nuestras acciones especialmente en las' +
+                        ' mujeres trans que por las condiciones en las que ejercen el trabajo sexual se encuentran en situación de vulnerabilidad.',
+                    website: 'www.wix.com/armarioabierto1/armarioabierto',
+                    address: null,
+                    email: 'armarioabierto.lgbti@gmail.com',
+                    phone: '(+57) 4831237',
+                    state: true,
+                    image: '/images/organización02.jpg',
                 }
             ]);
         });

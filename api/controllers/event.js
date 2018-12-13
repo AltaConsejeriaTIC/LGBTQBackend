@@ -6,7 +6,28 @@ const database = require('knex')(configuration);
 const { Event } = require('../../database/models/event');
 const knex = require('knex');
 var util = require('util');
+const AdminHelper = require('../helpers/admin_helper');
+const Joi = require('joi');
 
+const schema = Joi.object().keys({
+    id: Joi.number(),
+    title: Joi.string().max(50).required(),
+    description: Joi.string().min(150).max(800).required(),
+    place: Joi.string().allow(''),
+    address: Joi.string().required(),
+    start_date: Joi.date().required(),
+    finish_date: Joi.date().required(),
+    start_time: Joi.string().required(),
+    finish_time: Joi.string().required(),
+    image: Joi.string().required(),
+    state: Joi.boolean().default(true),
+    latitude: Joi.number(),
+    longitude: Joi.number(),
+    created_at: Joi.date(),
+    updated_at: Joi.date()
+  });
+  
+  
 function getEvents(req, res) {
     findEvents()
         .then((events) => {
@@ -15,7 +36,7 @@ function getEvents(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findEvents = () => Event.query().where('finish_date', ">=", getCurrentDate());
+const findEvents = () => Event.query().where('finish_date', ">=", new Date() ).andWhere('state', true).orderBy('start_date');
 
 function getAllEvents(req, res) {
     findAllEvents()
@@ -25,12 +46,7 @@ function getAllEvents(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAllEvents = () => Event.query()
-
-function getCurrentDate() {
-    return new Date();
-    //return new Date().toISOString().split('T')[0];
-}
+const findAllEvents = () => Event.query().where('finish_date', ">=", new Date() ).orderBy('start_date');
 
 function getEvent(req, res) {
     const id = req.swagger.params.id.value;
@@ -49,33 +65,107 @@ function getEvent(req, res) {
 const findEvent = (id) => Event.query().where('id', id).first();
 
 function postEvent(req, res) {
-    insert(req.body)
-        .then(response => {
-            res.status(201).send({ id: response.id });
-        })
-        .catch(e => console.error(e));
+
+    const token = req.headers.token;
+    const data = req.body;
+
+    Joi.validate(data, schema, (err, value) => {
+
+      if (err) {
+          res.status(422).json({
+              status: 'error',
+              message: 'Invalid request data',
+              error: err
+          });
+      } else {
+          AdminHelper.isAuthenticate(token)
+              .then((dataAdmin) => {
+                  if (dataAdmin.length === 1) {
+                      insert(req.body)
+                          .then(response => {
+                              res.status(201).send({ id: response.id });
+                          })
+                          .catch(e => console.error(e));
+                  } else {
+                      res.status(403).send({ message: 'Forbidden permissions' });
+                  }
+              })
+              .catch(e => console.error(e));
+      }
+
+  });
 }
 
 const insert = (event) => Event.query().insert(event);
 
-function updateEvent(req, res) {
+function updateStateEvent(req, res) {
 
     const id = req.swagger.params.id.value;
+    const token = req.headers.token;
 
-    findEvent(id)
-        .then(event => {
-            if (!event) {
-                res.status(400).send({ message: 'Invalid ID' });
-            } else {
-                eventUpdated(req.body, id)
-                    .then(response => {
-                        res.status(201).send({ id: response.id });
+    AdminHelper.isAuthenticate(token)
+        .then((dataAdmin) => {
+            if (dataAdmin.length === 1) {
+                findEvent(id)
+                    .then(event => {
+                        if (!event) {
+                            res.status(400).send({ message: 'Invalid ID' });
+                        } else {
+                            stateUpdated(event.state, id)
+                                .then(response => {
+                                    res.status(200).send({ id: response.id });
+                                })
+                                .catch((e) => console.error(e));
+
+                        }
                     })
                     .catch((e) => console.error(e));
-
+            } else {
+                res.status(403).send({ message: 'Forbidden permissions' });
             }
         })
-        .catch((e) => console.error(e));
+        .catch(e => console.error(e));
+
+}
+
+function updateEvent(req, res) {
+
+  const id = req.swagger.params.id.value;
+  const data = req.body;
+  const token = req.headers.token;
+  Joi.validate(data, schema, (err, value) => {
+
+      if (err) {
+          res.status(422).json({
+              status: 'error',
+              message: 'Invalid request data',
+              error: err
+          });
+      } else {
+          AdminHelper.isAuthenticate(token)
+              .then((dataAdmin) => {
+                  if (dataAdmin.length === 1) {
+                      findEvent(id)
+                          .then(event => {
+                              if (!event) {
+                                  res.status(400).send({ message: 'Invalid ID' });
+                              } else {
+                                  eventUpdated(req.body, id)
+                                      .then(response => {
+                                          res.status(201).send({ id: response.id });
+                                      })
+                                      .catch((e) => console.error(e));
+
+                              }
+                          })
+                          .catch((e) => console.error(e));
+                  } else {
+                      res.status(403).send({ message: 'Forbidden permissions' });
+                  }
+              })
+              .catch(e => console.error(e));
+      }
+  });
 }
 
 const eventUpdated = (data, id) => Event.query()
@@ -92,7 +182,13 @@ const eventUpdated = (data, id) => Event.query()
         state: data.state,
         latitude: data.latitude,
         longitude: data.longitude,
-        updated_at: getCurrentDate()
+        updated_at: new Date()
+    });
+
+const stateUpdated = (data, id) => Event.query()
+    .patchAndFetchById(id, {
+        state: !data,
+        updated_at: new Date()
     });
 
 
@@ -101,5 +197,6 @@ module.exports = {
     getAllEvents,
     getEvent,
     postEvent,
-    updateEvent
+    updateEvent,
+    updateStateEvent
 };

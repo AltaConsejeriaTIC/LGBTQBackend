@@ -2,7 +2,6 @@ exports.seed = function(knex, Promise) {
     return knex('alliances').del()
         .then(function() {
             return knex('alliances').insert([{
-                    id: 1,
                     name: 'Talento diverso',
                     description: 'El programa talento diverso tiene como objetivo mejorar las condiciones laborales de la' +
                         ' población LGBT en Colombia, generando estrategias que faciliten la empleabilidad en entornos' +
@@ -18,10 +17,9 @@ exports.seed = function(knex, Promise) {
                     email: 'talentodiverso@cclgbt.co',
                     state: true,
                     finish_date: '2018-11-12',
-                    image: '/images/aliado01.jpg',
+                    image: '/images/Aliado01.jpg',
                 },
                 {
-                    id: 2,
                     name: 'Cámara de Comerciantes LGBT de Colombia',
                     description: 'La Cámara de Comerciantes LGBT de Colombia - CCLGBTco, es una institución privada, sín ánimo de lucro,' +
                         ' que nació en el año 2012, como una iniciativa dirigida a fortalecer y empoderar económica y socialmente a la comunidad LGBTI del país',
@@ -33,10 +31,9 @@ exports.seed = function(knex, Promise) {
                     email: 'info@ccb.org.co',
                     state: true,
                     finish_date: '2018-12-02',
-                    image: '/images/aliado02.jpg',
+                    image: '/images/Aliado02.jpg',
                 },
                 {
-                    id: 3,
                     name: 'Tostao',
                     description: 'En TOSTAO’ Café & Pan tenemos el compromiso de ofrecerte productos de la más alta calidad a precios justos,' +
                         ' cumpliendo con la promesa de valor de ser un modelo #sinestratos.',
@@ -47,7 +44,7 @@ exports.seed = function(knex, Promise) {
                     email: 'info@tostaocafeypan.com',
                     state: true,
                     finish_date: '2018-11-30',
-                    image: '/images/aliado03.jpg',
+                    image: '/images/Aliado03.jpg',
                 }
             ]);
         });

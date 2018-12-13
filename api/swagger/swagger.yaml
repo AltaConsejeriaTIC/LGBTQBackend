@@ -81,13 +81,40 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /deleteToken:
+    x-swagger-router-controller: login
+    put:
+      tags:
+        - "set-token-null"
+      description: set token null that was already logged in
+      operationId: deleteAdminToken
+      parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
+        - in: body
+          name: empty
+          description: empty body
+          schema:
+            type: object
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /events:
     x-swagger-router-controller: event
     get:
       description: get the events list
       operationId: getEvents
       tags:
-        - "get events"
+        - "events"
       responses:
         "200":
           description: Success
@@ -101,8 +128,13 @@ paths:
       description: add a new event to the list
       operationId: postEvent
       tags:
-        - "post events"
+        - "events"
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: event
           description: The event to create.
@@ -123,7 +155,7 @@ paths:
       description: get the events list
       operationId: getAllEvents
       tags:
-        - "get events"
+        - "events"
       responses:
         "200":
           description: Success
@@ -164,6 +196,11 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: event
           description: The event to update.
@@ -177,7 +214,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            $ref: "#/definitions/ErrorResponse"
     delete:
       description: delete a event
       # define the parameters
@@ -192,6 +229,37 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateEvenState/{id}:
+    x-swagger-router-controller: event
+    put:
+      tags:
+        - "update Event"
+      description: Update state of the event
+      operationId: updateStateEvent
+      parameters:
+        - name: id 
+          description: event id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
         default:
           description: Error
           schema:
@@ -218,6 +286,11 @@ paths:
       description: add a news to the list
       operationId: postNews
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: news
           description: News to create.
@@ -228,6 +301,22 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /allnews:
+    x-swagger-router-controller: news
+    get:
+      description: get all news list
+      operationId: getAllNews
+      tags:
+        - "get news"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/NewsListResponse"
         default:
           description: Error
           schema:
@@ -263,6 +352,11 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: news
           description: The news to update.
@@ -289,11 +383,63 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
       responses:
         "200":
           description: Success
           schema:
             $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateNewsState/{id}:
+    x-swagger-router-controller: news
+    put:
+      tags:
+        - "update News"
+      description: Update state of news
+      operationId: updateStateNews
+      parameters:
+        - name: id 
+          description: news id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: news token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /allOrganizations:
+    x-swagger-router-controller: organization
+    get:
+      description: get the organizations list
+      operationId: getAllOrganizations
+      tags:
+        - "organizations"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/OrganizationsListResponse"
         default:
           description: Error
           schema:
@@ -304,7 +450,7 @@ paths:
       description: get the organizations list
       operationId: getOrganizations
       tags:
-        - "get organizations"
+        - "organizations"
       responses:
         "200":
           description: Success
@@ -317,7 +463,14 @@ paths:
     post:
       description: add a new organization to the list
       operationId: postOrganization
+      tags:
+        - "organizations"
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: organization
           description: The organization to create.
@@ -337,6 +490,8 @@ paths:
     get:
       description: get an organization
       operationId: getOrganization
+      tags:
+        - "organizations"
       parameters: 
       - name: id
         type: number
@@ -354,14 +509,18 @@ paths:
     put:
       description: update an organization
       operationId: updateOrganization
-      # define the parameters
       tags:
-        - "update Organization"
+        - "organizations"
       parameters:
         - name: id
           description: organization id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
         - in: body
           name: organization
@@ -373,6 +532,53 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateOrganizationState/{id}:
+    x-swagger-router-controller: organization
+    put:
+      tags:
+        - "organizations"
+      description: Update state of organization
+      operationId: updateStateOrganization
+      parameters:
+        - name: id 
+          description: organization id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: organization token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /allAlliances:
+    x-swagger-router-controller: alliance
+    get:
+      description: get the alliances list
+      operationId: getAllAlliances
+      tags:
+        - "get alliances"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AlliancesListResponse"
         default:
           description: Error
           schema:
@@ -399,6 +605,11 @@ paths:
       tags:
         - "post alliances"
       parameters:
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: alliance
           description: The alliance to create.
@@ -444,13 +655,49 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: alliance
           description: The alliance to update.
           schema:
-            $ref: "#/definitions/Organization"
+            $ref: "#/definitions/Alliance"
       responses:
         "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateAllianceState/{id}:
+    x-swagger-router-controller: alliance
+    put:
+      tags:
+        - "update Alliance"
+      description: Update state of alliance
+      operationId: updateStateAlliance
+      parameters:
+        - name: id 
+          description: alliance id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: alliance token
+          type: string
+          required: true
+        - in: body 
+          name: state
+          schema:
+            $ref: "#/definitions/State"
+      responses:
+        "200":
           description: Success
           schema:
             $ref: "#/definitions/GeneralObjectResponse"
@@ -524,6 +771,11 @@ paths:
           description: user id
           type: number
           in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
         - in: body
           name: user
@@ -624,6 +876,11 @@ paths:
           type: number
           in: path
           required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
         - in: body
           name: complaint
           description: The complaint to update.
@@ -646,6 +903,75 @@ paths:
           description: complaint id
           type: number
           in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralDeleteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /highlights:
+    x-swagger-router-controller: highlight
+    get:
+      description: get the highlights list
+      operationId: getHighlights
+      tags:
+        - "get highlights"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HighlightListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new highlight to the list
+      operationId: postHighlight
+      tags:
+        - "post highlights"
+      parameters:
+        - in: header
+          name: token
+          description: highlight token
+          type: string
+          required: true
+        - in: body
+          name: highlight
+          description: The highlight to create.
+          schema:
+            $ref: "#/definitions/Highlight"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /highlights/{id}:
+    x-swagger-router-controller: highlight
+    delete:
+      description: delete a highlight
+      operationId: deleteHighlight
+      tags:
+        - "delete highlights"
+      # define the parameters
+      parameters:
+        - name: id
+          description: highlight id
+          type: number
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
           required: true
       responses:
         "200":
@@ -681,6 +1007,12 @@ definitions:
     properties:
       message:
         type: string
+  SuccessResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
   loginForm:
     properties:
       email:
@@ -699,6 +1031,11 @@ definitions:
     properties:
       token:
         type: string
+  State:
+    type: object
+    properties:
+      state:
+        type: boolean
   Event:
     type: object
     properties:
@@ -748,8 +1085,6 @@ definitions:
       - finish_time
       - state
       - image
-      - latitude
-      - longitude
   GeneralObjectResponse:
     type: object
     properties:
@@ -867,6 +1202,9 @@ definitions:
       website:
         type: string
         description: Website of the alliance
+      email:
+        type: string
+        description: Email of the alliance
       phone:
         type: string
         description: Phone of the alliance
@@ -884,6 +1222,7 @@ definitions:
       - description
       - offer
       - finish_date
+      - email
       - state
       - image
   AlliancesListResponse:
@@ -915,7 +1254,7 @@ definitions:
       phone:
         type: string
         description: complainant's phone
-      event_date:
+      event_day:
         type: string
         description: Date on which the event occurred
       event_place:
@@ -931,7 +1270,7 @@ definitions:
       - document_number
       - email
       - phone
-      - event_date
+      - event_day
       - event_place
       - description
   ComplaintListResponse:
@@ -978,6 +1317,9 @@ definitions:
       birth_day:
         type: string
         description: User's birth day      
+      education:
+        type: string
+        description: User's education
     required:
       - document_type
       - document_number
@@ -989,7 +1331,8 @@ definitions:
       - sex_birth
       - sexual_orientation
       - gender
-      - birth_day 
+      - birth_day
+      - education
   UserListResponse:
     required:
       - users
@@ -998,3 +1341,23 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GeneralObjectResponse"
+  Highlight:
+    type: object
+    properties:
+      section_id:
+        type: number
+        description: Id of the highligh in the respective section
+      section:
+        type: string
+        description: Section in which the highlight is      
+    required:
+      - section_id
+      - section      
+  HighlightListResponse:
+    required:
+      - highlights
+    properties:
+      highlights:
+        type: array
+        items:
+          $ref: "#/definitions/GeneralObjectResponse"        

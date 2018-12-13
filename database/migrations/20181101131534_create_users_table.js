@@ -6,13 +6,14 @@ exports.up = function(knex, Promise) {
             table.string('document_number').notNullable();
             table.string('first_name').notNullable();
             table.string('last_name').notNullable();
-            table.string('addres').notNullable();
+            table.string('address').notNullable();
             table.string('email').notNullable();
             table.string('phone').notNullable();
             table.string('sex_birth').notNullable();
             table.string("sexual_orientation").notNullable();
             table.string('gender').notNullable();
             table.date('birth_day').notNullable();
+            table.string('education').notNullable();
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
         })

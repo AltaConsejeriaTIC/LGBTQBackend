@@ -6,6 +6,25 @@ const database = require('knex')(configuration);
 const { User } = require('../../database/models/user');
 const knex = require('knex');
 var util = require('util');
+const  AdminHelper = require('../helpers/admin_helper');
+const Joi = require('joi');
+
+const schema = Joi.object().keys({
+
+  document_type: Joi.string().max(20).required(),
+  document_number: Joi.string().max(15).required(),
+  first_name: Joi.string().regex(/^[a-záéíóúñüçA-ZÁÉÍÓÚ´ÑÜÇ\s]*$/i).required(),
+  last_name: Joi.string().regex(/^[a-záéíóúñüçA-ZÁÉÍÓÚ´ÑÜÇ\s]*$/i).required(),
+  address: Joi.string().required(),
+  email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
+  phone: Joi.string().regex(/^[0-9]*$/).required(),
+  sex_birth: Joi.string().required(),
+  sexual_orientation: Joi.string().required(),
+  gender: Joi.string().required(),
+  birth_day: Joi.date().max('now').required(),
+  education: Joi.string().required()
+
+});
 
 function getUsers(req, res) {
     findUsers()
@@ -19,7 +38,6 @@ const findUsers = () => User.query();
 
 function getCurrentDate() {
     return new Date();
-    //return new Date().toISOString().split('T')[0];
 }
 
 function getUser(req, res) {
@@ -39,11 +57,22 @@ function getUser(req, res) {
 const findUser = (id) => User.query().where('id', id).first();
 
 function postUser(req, res) {
-    insert(req.body)
+  const data = req.body;
+  Joi.validate(data, schema, (err, value) => {
+    if (err) {
+      res.status(422).json({
+          status: 'error',
+          message: 'Invalid request data',
+          error: err
+      });
+    } else {
+        insert(data)
         .then(response => {
             res.status(201).send({ id: response.id });
         })
         .catch(e => console.error(e));
+    }
+  });   
 }
 
 const insert = (user) => User.query().insert(user);
@@ -51,8 +80,11 @@ const insert = (user) => User.query().insert(user);
 function updateUser(req, res) {
 
     const id = req.swagger.params.id.value;
-
-    findUser(id)
+    const token = req.headers.token;
+    AdminHelper.isAuthenticate(token)
+    .then( (dataAdmin)=>{
+      if( dataAdmin.length === 1 ){
+        findUser(id)
         .then(user => {
             if (!user) {
                 res.status(400).send({ message: 'Invalid ID' });
@@ -66,6 +98,13 @@ function updateUser(req, res) {
             }
         })
         .catch((e) => console.error(e));
+      }else{
+        res.status(403).send({ message: 'Forbidden permissions' });
+      }
+    })
+    .catch(e => console.error(e));
+
+    
 }
 
 const userUpdated = (data, id) => User.query()

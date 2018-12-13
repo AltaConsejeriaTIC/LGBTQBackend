@@ -21,6 +21,12 @@ const knex = Knex(knexConfig.development);
 
 Model.knex(knex);
 
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*" );
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 app.use(helmet());
 
 app.use(express.static('public'));
@@ -28,7 +34,7 @@ app.use(express.static('public'));
 app.use(fileUpload());
 
 app.post('/upload', (req, res) => {
-    let EDFile = req.files.file
+    let EDFile = req.files.file;    
     EDFile.mv(`./public/images/${EDFile.name}`, err => {
         if (err) return res.status(500).send({ message: err })
 
@@ -38,7 +44,6 @@ app.post('/upload', (req, res) => {
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
     if (err) { throw err; }
-
     // install middleware
     swaggerExpress.register(app);
 
