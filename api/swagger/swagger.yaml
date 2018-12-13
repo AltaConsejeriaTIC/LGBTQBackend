@@ -45,6 +45,38 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /deleteToken/{id}:
+    x-swagger-router-controller: login
+    put:
+      tags:
+        - "set-token-null"
+      description: set token null that was already logged in
+      operationId: deleteAdminToken
+      parameters:
+        - name: id 
+          description: event id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: event token
+          type: string
+          required: true
+        - in: body
+          name: empty
+          description: empty body
+          schema:
+            type: object
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /events:
     x-swagger-router-controller: event
     get:
@@ -939,6 +971,12 @@ definitions:
       - success
       - description
   ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  SuccessResponse:
     required:
       - message
     properties:
