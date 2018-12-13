@@ -45,7 +45,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /deleteToken/{id}:
+  /deleteToken:
     x-swagger-router-controller: login
     put:
       tags:
@@ -53,11 +53,6 @@ paths:
       description: set token null that was already logged in
       operationId: deleteAdminToken
       parameters:
-        - name: id 
-          description: event id 
-          type: string
-          in: path
-          required: true
         - in: header
           name: token
           description: event token

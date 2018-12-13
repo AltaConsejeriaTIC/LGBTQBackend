@@ -36,26 +36,17 @@ function login(req, res) {
 
 
 function deleteAdminToken(req, res){
-  const id = req.swagger.params.id.value;
+
   const token = req.headers.token;
 
   AdminHelper.isAuthenticate(token)
       .then((dataAdmin) => {
           if (dataAdmin.length === 1) {
-            findAdminById(id)
-                  .then(admin => {
-                      if( admin.length === 1){
-                        tokenDelete( id )
-                              .then(response => {
-                                  res.status(200).send({ message: 'Token has been deleted successfully' });
-                              })
-                              .catch((e) => console.error(e));
-                      }
-                      else{
-                        res.status(400).send({ message: 'Invalid ID' });
-                      }
-                  })
-                  .catch((e) => console.error(e));
+            tokenDelete( token )
+              .then(response => {
+                res.status(200).send({ message: 'Token has been deleted successfully' });
+          })
+          .catch((e) => console.error(e));              
           } else {
               res.status(403).send({ message: 'Forbidden permissions' });
           }
@@ -63,12 +54,9 @@ function deleteAdminToken(req, res){
       .catch(e => console.error(e));
 }
 
-const findAdminById = (id) => Admin.query().where('id', id);
-
-const tokenDelete = ( id ) => Admin.query()
-    .patchAndFetchById(id, {
-        token: null
-    });
+const tokenDelete = ( token ) => Admin.query()
+    .patch({token: null})
+    .where('token', token);
 
 const createToken = () => {
     return new Promise((resolve, reject) => {
