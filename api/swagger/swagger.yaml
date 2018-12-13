@@ -18,6 +18,42 @@ consumes:
 produces:
   - application/json
 paths:
+  /token/{token}:
+    x-swagger-router-controller: notification
+    get:
+      description: add new valid token
+      operationId: addToken
+      parameters:
+        - name: token
+          type: string
+          in: path
+          required: true
+      tags:
+        - "get token"
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+  /send:
+     x-swagger-router-controller: notification
+     post:
+       description: send push notification
+       operationId: send
+       parameters:
+         - in: body
+           name: sendForm
+           description: send form
+           required: true
+           schema:
+             $ref: "#/definitions/sendForm"
+       tags:
+         - "get token"
+       responses:
+         "200":
+           description: Success
+           schema:
+             type: string
   /login:
     # binds a127 app logic to a route
     x-swagger-router-controller: login
@@ -650,6 +686,12 @@ definitions:
       email:
         type: string
       password:
+        type: string
+  sendForm:
+    properties:
+      title:
+        type: string
+      body:
         type: string
   LoginResponse:
     required:
