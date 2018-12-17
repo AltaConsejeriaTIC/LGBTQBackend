@@ -53,7 +53,7 @@ function getComplaints(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findComplaints = () => Complaint.query();
+const findComplaints = () => Complaint.query().orderBy('created_at','desc');
 
 function getCurrentDate() {
     return new Date();
