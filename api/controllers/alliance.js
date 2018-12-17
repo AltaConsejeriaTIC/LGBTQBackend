@@ -27,7 +27,13 @@ function getAllAlliances(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAllAlliances = () => Alliance.query().orderBy('updated_at','desc');
+const findAllAlliances = () => Alliance.query().where('finish_date','>=',getDateTwoMonthBefore() ).orderBy('updated_at','desc');
+
+function getDateTwoMonthBefore(){
+  var currentDate = new Date();
+  currentDate.setMonth( currentDate.getMonth() - 2 );
+  return currentDate;
+}
 
 function getAlliances(req, res) {
     findAlliances()
