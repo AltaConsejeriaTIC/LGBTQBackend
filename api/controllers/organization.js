@@ -26,7 +26,7 @@ function getAllOrganizations(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAllOrganizations = () => Organization.query();
+const findAllOrganizations = () => Organization.query().orderBy('updated_at','desc');
 
 function getOrganizations(req, res) {
     findOrganizations()
@@ -36,7 +36,7 @@ function getOrganizations(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findOrganizations = () => Organization.query().where('state', true);
+const findOrganizations = () => Organization.query().where('state', true).orderBy('updated_at','desc');
 
 function getOrganization(req, res) {
     const id = req.swagger.params.id.value;

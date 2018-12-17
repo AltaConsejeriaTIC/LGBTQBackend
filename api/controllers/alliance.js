@@ -27,7 +27,7 @@ function getAllAlliances(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAllAlliances = () => Alliance.query();
+const findAllAlliances = () => Alliance.query().orderBy('updated_at','desc');
 
 function getAlliances(req, res) {
     findAlliances()
@@ -37,7 +37,7 @@ function getAlliances(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAlliances = () => Alliance.query().where('state', true);
+const findAlliances = () => Alliance.query().where('state', true).orderBy('updated_at','desc');
 
 function getAlliance(req, res) {
     const id = req.swagger.params.id.value;
