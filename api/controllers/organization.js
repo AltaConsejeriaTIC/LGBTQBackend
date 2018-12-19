@@ -13,6 +13,7 @@ const schema = Joi.object().keys({
     email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
     phone: Joi.string().regex(/^([\(]?\+?[0-9]{1,3}[\)]?){0,2}[0-9\s]{7,20}((ext|ext\.|Ext|Ext\.){1}\s[0-9\s]{1,7})?$/).required(),
     state: Joi.boolean().default(true),
+    deleted: Joi.boolean().default(false),
     image: Joi.string().required(),
     created_at: Joi.date(),
     updated_at: Joi.date()
@@ -26,7 +27,7 @@ function getAllOrganizations(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findAllOrganizations = () => Organization.query().orderBy('updated_at','desc');
+const findAllOrganizations = () => Organization.query().where('deleted',false).orderBy('updated_at','desc');
 
 function getOrganizations(req, res) {
     findOrganizations()
@@ -36,7 +37,7 @@ function getOrganizations(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findOrganizations = () => Organization.query().where('state', true).orderBy('updated_at','desc');
+const findOrganizations = () => Organization.query().where('state', true).andWhere('deleted', false).orderBy('updated_at','desc');
 
 function getOrganization(req, res) {
     const id = req.swagger.params.id.value;
@@ -138,6 +139,7 @@ const organizationUpdated = (data, id) => Organization.query()
         phone: data.phone,
         state: data.state,
         image: data.image,
+        deleted: data.deleted,
         updated_at: new Date()
     });
 

@@ -1169,6 +1169,9 @@ definitions:
       state:
         type: boolean
         description: indicates if the organization is 'noted' or no
+      deleted:
+        type: boolean
+        description: checks if an organization is deleted
       image:
         type: string
         format: byte
@@ -1179,6 +1182,7 @@ definitions:
       - image
       - email
       - phone
+      - deleted
   OrganizationsListResponse:
     required:
       - organizations
