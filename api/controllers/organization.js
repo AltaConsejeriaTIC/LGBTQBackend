@@ -11,7 +11,7 @@ const schema = Joi.object().keys({
     website: Joi.string().allow(''),
     address: Joi.string().allow(''),
     email: Joi.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z-.]{2,}$/i).required(),
-    phone: Joi.string().regex(/^([\(]?\+[0-9]{1,3}[\)]?)?[0-9\s]{7,20}$/).required(),
+    phone: Joi.string().regex(/^([\(]?\+?[0-9]{1,3}[\)]?){0,2}[0-9\s]{7,20}((ext|ext\.|Ext|Ext\.){1}\s[0-9\s]{1,7})?$/).required(),
     state: Joi.boolean().default(true),
     image: Joi.string().required(),
     created_at: Joi.date(),
