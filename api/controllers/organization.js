@@ -171,9 +171,44 @@ function updateStateOrganization(req, res) {
         .catch(e => console.error(e));
 }
 
+function updateDeleteOrganization(req, res) {
+
+  const id = req.swagger.params.id.value;
+  const token = req.headers.token;
+  AdminHelper.isAuthenticate(token)
+      .then((dataAdmin) => {
+          if (dataAdmin.length === 1) {
+              findOrganization(id)
+                  .then(organization => {
+                      if (!organization) {
+                          res.status(400).send({ message: 'Invalid ID' });
+                      } else {
+
+                           deleteUpdate(req.body.deleted, id)
+                              .then(response => {
+                                  res.status(200).send({ id: response.id });
+                              })
+                              .catch((e) => console.error(e));
+
+                      }
+                  })
+                  .catch((e) => console.error(e));
+          } else {
+              res.status(403).send({ message: 'Forbidden permissions' });
+          }
+      })
+      .catch(e => console.error(e));
+}
+
 const stateUpdated = (data, id) => Organization.query()
     .patchAndFetchById(id, {
         state: !data,
+        updated_at: new Date()
+    });
+
+const deleteUpdate = (data, id) => Organization.query()
+    .patchAndFetchById(id, {
+        deleted: data,
         updated_at: new Date()
     });
 
@@ -184,5 +219,6 @@ module.exports = {
     getOrganization,
     postOrganization,
     updateOrganization,
-    updateStateOrganization
+    updateStateOrganization,
+    updateDeleteOrganization
 };

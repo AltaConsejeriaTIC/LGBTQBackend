@@ -567,6 +567,37 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /updateOrganizationDeleted/{id}:
+    x-swagger-router-controller: organization
+    put:
+      tags:
+        - "organizations"
+      description: Update deleted of organization
+      operationId: updateDeleteOrganization
+      parameters:
+        - name: id 
+          description: organization id 
+          type: string
+          in: path
+          required: true
+        - in: header
+          name: token
+          description: organization token
+          type: string
+          required: true
+        - in: body 
+          name: deleted
+          schema:
+            $ref: "#/definitions/Deleted"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralObjectResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /allAlliances:
     x-swagger-router-controller: alliance
     get:
@@ -1035,6 +1066,11 @@ definitions:
     type: object
     properties:
       state:
+        type: boolean
+  Deleted:
+    type: object
+    properties:
+      deleted:
         type: boolean
   Event:
     type: object
