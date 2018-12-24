@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
             table.string('phone').notNullable();
             table.boolean('state').notNullable();
             table.string('image').notNullable();
-            table.string('deleted');
+            table.boolean('deleted');
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
         })
