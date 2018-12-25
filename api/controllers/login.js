@@ -31,7 +31,7 @@ function login(req, res) {
         .then(() => {
             res.status(200).send({ token: adminData[0].token, id: adminData[0].id  });
         })
-        .catch((e) => console.error(e));
+        .catch(() => res.status(422).send({message: "user or password incorrect"}));
 }
 
 
