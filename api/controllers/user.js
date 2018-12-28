@@ -34,7 +34,7 @@ function getUsers(req, res) {
         .catch((e) => console.error(e));
 }
 
-const findUsers = () => User.query();
+const findUsers = () => User.query().orderBy('created_at','desc');
 
 function getCurrentDate() {
     return new Date();
